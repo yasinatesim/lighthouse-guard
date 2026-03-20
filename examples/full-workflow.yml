@@ -1,0 +1,148 @@
+# .github/workflows/lighthouse.yml
+#
+# Lighthouse Guard — Full Workflow
+# ─────────────────────────────────────────────────────────────────────────────
+# Demonstrates:
+#   ✅ Dashboard artifact upload  →  download from Actions → Artifacts
+#   ✅ Slack notification          →  sent on every run, @mention on failure
+#   ✅ PR comment                  →  score table posted to the pull request
+#   ✅ Pipeline breaking           →  job fails when scores are below threshold
+#   ✅ Multi-device testing        →  mobile + desktop in one run
+#   ✅ Multiple pages              →  each page gets its own threshold config
+#   ✅ Ban protection              →  delay-between-runs prevents IP bans
+#   ✅ Retry on flakiness          →  max-retries recovers from Chrome crashes
+#
+# Required secrets (Settings → Secrets → Actions):
+#   SLACK_WEBHOOK  →  https://hooks.slack.com/services/xxx/yyy/zzz
+#
+# ─────────────────────────────────────────────────────────────────────────────
+
+name: Lighthouse Performance Guard
+
+on:
+  pull_request:
+    branches: [main, develop]
+  push:
+    branches: [main]
+  schedule:
+    - cron: '0 9 * * 1-5'    # Weekdays at 09:00 UTC
+
+jobs:
+  lighthouse:
+    name: Lighthouse Audit
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      # ── Chrome ────────────────────────────────────────────────────────────
+      - name: Install Chrome
+        uses: browser-actions/setup-chrome@v1
+        with:
+          chrome-version: stable
+
+      # ── Lighthouse Guard ──────────────────────────────────────────────────
+      #
+      # What happens:
+      #   1. Runs Lighthouse 3× per URL per device (median eliminates outliers)
+      #   2. Waits delay-between-runs between each measurement (ban protection)
+      #   3. Retries up to 3× if Chrome crashes or returns no result
+      #   4. Aggregates results → compares against per-device thresholds
+      #   5. Posts score table as PR comment (requires github-token)
+      #   6. Sends Slack notification with pass/fail status
+      #   7. Uploads dashboard HTML as artifact (always, even on failure)
+      #   8. Sets job exit code:
+      #        exit 0  →  all scores met thresholds   (pipeline continues ✅)
+      #        exit 1  →  at least one score failed   (pipeline breaks   ❌)
+      #
+      - name: Run Lighthouse Guard
+        uses: yasinatesim/lighthouse-guard@v1
+        id: lighthouse
+        with:
+          # ── Pages to audit ────────────────────────────────────────────────
+          # JSON array: each page can have its own name (shown in dashboard)
+          urls: |
+            [
+              {"url": "https://your-site.com",         "name": "Home"},
+              {"url": "https://your-site.com/blog",    "name": "Blog"},
+              {"url": "https://your-site.com/contact", "name": "Contact"}
+            ]
+
+          # ── Measurement strategy ──────────────────────────────────────────
+          # runs=3 + strategy=median: takes the middle score of 3 runs.
+          # Eliminates outliers caused by network jitter or cold-start.
+          runs: 3
+          strategy: median
+
+          # ── Devices ───────────────────────────────────────────────────────
+          # Both mobile and desktop are audited. Each has the same thresholds
+          # (set below). For per-page per-device thresholds use the JS config.
+          devices: mobile,desktop
+
+          # ── Score thresholds (0–100) ──────────────────────────────────────
+          # Applied to every page × device combination.
+          # Any score below threshold triggers fail-on-threshold.
+          performance-threshold: 80
+          accessibility-threshold: 90
+          seo-threshold: 85
+          best-practices-threshold: 80
+
+          # ── Pipeline control ──────────────────────────────────────────────
+          # true  → job exit code = 1 when any threshold is missed  ❌
+          # false → scores are recorded but the pipeline never breaks
+          fail-on-threshold: true
+
+          # ── Ban protection ────────────────────────────────────────────────
+          # delay-between-runs : wait between consecutive measurements of the same URL
+          # delay-between-pages: wait between switching to the next URL
+          # Both include 0–30% random jitter to avoid bot-detection patterns.
+          delay-between-runs: 10000   # 10s  (+ up to 3s jitter)
+          delay-between-pages: 15000  # 15s  (+ up to 4.5s jitter)
+
+          # ── Retry on failure ──────────────────────────────────────────────
+          # If Chrome crashes or Lighthouse returns nothing, retry up to 3×.
+          # Retry delay = retry-delay × attempt (exponential: 15s, 30s, 45s).
+          # graceful-fail: true means a page with 0 successful runs is skipped
+          # rather than aborting the entire pipeline.
+          max-retries: 3
+
+          # ── Slack notification ────────────────────────────────────────────
+          # Sends a Slack message after every run.
+          # Message includes: overall pass/fail, per-page scores, failures.
+          # Store the webhook URL in GitHub Secrets (never hardcode it).
+          slack-webhook: ${{ secrets.SLACK_WEBHOOK }}
+
+          # ── PR comment ────────────────────────────────────────────────────
+          # Posts a score table as a comment on the pull request.
+          # Uses the built-in GITHUB_TOKEN — no extra secret needed.
+          github-token: ${{ github.token }}
+
+          # ── Dashboard artifact ────────────────────────────────────────────
+          # Uploads an interactive HTML dashboard as a GitHub Actions artifact.
+          # To view:
+          #   1. Go to Actions → select this workflow run
+          #   2. Scroll to "Artifacts" at the bottom
+          #   3. Download "lighthouse-dashboard"
+          #   4. Unzip and open index.html in your browser
+          # The dashboard shows scores, metrics (FCP, LCP, TBT, CLS), and failures.
+          upload-dashboard: true
+
+      # ── Print outputs ─────────────────────────────────────────────────────
+      # These are always printed, even when the job fails (if: always()).
+      # Use outputs in downstream jobs with: needs.lighthouse.outputs.passed
+      - name: Print Results
+        if: always()
+        run: |
+          echo "──────────────────────────────────"
+          echo "  passed  : ${{ steps.lighthouse.outputs.passed }}"
+          echo "  summary : ${{ steps.lighthouse.outputs.summary }}"
+          echo "──────────────────────────────────"
+          echo "Full JSON results:"
+          echo '${{ steps.lighthouse.outputs.results }}' | python3 -m json.tool
+
+      # ── Block deployment on failure ───────────────────────────────────────
+      # This step only runs when the Lighthouse job passes.
+      # Remove it (or set needs: [lighthouse]) to deploy regardless of scores.
+      - name: Deploy (only if Lighthouse passed)
+        if: steps.lighthouse.outputs.passed == 'true'
+        run: echo "✅ Scores OK — proceeding to deploy"

@@ -1,0 +1,9 @@
+node_modules/
+dist/
+*.js.map
+lighthouse-guard-results/
+lighthouse-dashboard/
+.env
+*.local
+.DS_Store
+coverage/

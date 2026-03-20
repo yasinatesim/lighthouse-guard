@@ -1,0 +1,96 @@
+name: 'Lighthouse Guard'
+description: 'Stable Lighthouse CI - Ban-protected, retry-supported, multi-measurement, dashboard'
+author: 'lighthouse-guard'
+
+branding:
+  icon: 'zap'
+  color: 'yellow'
+
+inputs:
+  urls:
+    description: 'List of URLs to test (JSON array or comma-separated)'
+    required: true
+
+  runs:
+    description: 'Number of measurements per URL'
+    required: false
+    default: '3'
+
+  strategy:
+    description: 'Result aggregation strategy: median or average'
+    required: false
+    default: 'median'
+
+  devices:
+    description: 'Devices: mobile,desktop or just one of them'
+    required: false
+    default: 'mobile,desktop'
+
+  performance-threshold:
+    description: 'Minimum performance score (0-100)'
+    required: false
+    default: '0'
+
+  accessibility-threshold:
+    description: 'Minimum accessibility score (0-100)'
+    required: false
+    default: '0'
+
+  seo-threshold:
+    description: 'Minimum SEO score (0-100)'
+    required: false
+    default: '0'
+
+  best-practices-threshold:
+    description: 'Minimum best practices score (0-100)'
+    required: false
+    default: '0'
+
+  delay-between-runs:
+    description: 'Wait time between measurements (ms) - ban protection'
+    required: false
+    default: '10000'
+
+  delay-between-pages:
+    description: 'Wait time between pages (ms) - ban protection'
+    required: false
+    default: '15000'
+
+  max-retries:
+    description: 'Maximum number of retries for failed measurements'
+    required: false
+    default: '3'
+
+  fail-on-threshold:
+    description: 'Should the action fail when threshold values are not met'
+    required: false
+    default: 'true'
+
+  slack-webhook:
+    description: 'Slack incoming webhook URL (optional)'
+    required: false
+    default: ''
+
+  github-token:
+    description: 'GitHub token for PR comments'
+    required: false
+    default: ${{ github.token }}
+
+  upload-dashboard:
+    description: 'Whether to upload the dashboard as an artifact'
+    required: false
+    default: 'true'
+
+outputs:
+  results:
+    description: 'All results in JSON format'
+
+  passed:
+    description: 'Whether all tests passed (true/false)'
+
+  summary:
+    description: 'Short summary text'
+
+runs:
+  using: 'node20'
+  main: 'dist/action/index.js'

@@ -1,0 +1,97 @@
+# .github/workflows/lighthouse-local.yml
+#
+# Lighthouse Guard — Testing a Locally Running Application
+# ─────────────────────────────────────────────────────────────────────────────
+# Use this pattern when you want to audit your app BEFORE it's deployed.
+# The workflow:
+#   1. Checks out the code
+#   2. Builds and starts your application on localhost
+#   3. Waits until it's ready
+#   4. Runs Lighthouse against localhost
+#   5. Kills the server and reports results
+#
+# Works with: Next.js, Express, Vite, Create React App, Nuxt, SvelteKit, etc.
+# ─────────────────────────────────────────────────────────────────────────────
+
+name: Lighthouse (Local Server)
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  lighthouse:
+    name: Lighthouse Audit (localhost)
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      # ── Setup ─────────────────────────────────────────────────────────────
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+
+      - name: Install Chrome
+        uses: browser-actions/setup-chrome@v1
+        with:
+          chrome-version: stable
+
+      # ── Build & Start App ─────────────────────────────────────────────────
+      # Adjust these commands for your stack:
+      #   Next.js   →  npm run build && npm start
+      #   Vite      →  npm run build && npx serve dist -p 3000
+      #   Express   →  node server.js
+      #   Django    →  python manage.py runserver 0.0.0.0:3000
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build application
+        run: npm run build
+
+      - name: Start application
+        run: npm start &                   # & runs in background
+        env:
+          PORT: 3000
+          NODE_ENV: production
+
+      # ── Wait until server is ready ─────────────────────────────────────────
+      # wait-on polls the URL every second until it responds or timeout expires.
+      - name: Wait for server
+        run: npx wait-on http://localhost:3000 --timeout 60000
+
+      # ── Lighthouse Guard against localhost ────────────────────────────────
+      - name: Run Lighthouse Guard
+        uses: yasinatesim/lighthouse-guard@v1
+        id: lighthouse
+        with:
+          urls: |
+            [
+              {"url": "http://localhost:3000",         "name": "Home"},
+              {"url": "http://localhost:3000/about",   "name": "About"},
+              {"url": "http://localhost:3000/contact", "name": "Contact"}
+            ]
+          runs: 2
+          strategy: median
+          devices: mobile,desktop
+          performance-threshold: 85
+          accessibility-threshold: 90
+          seo-threshold: 80
+          best-practices-threshold: 80
+          fail-on-threshold: true
+          # No delay needed for localhost — same machine, no ban risk
+          delay-between-runs: 0
+          delay-between-pages: 2000
+          max-retries: 2
+          slack-webhook: ${{ secrets.SLACK_WEBHOOK }}
+          github-token: ${{ github.token }}
+          upload-dashboard: true
+
+      # ── Results ───────────────────────────────────────────────────────────
+      - name: Print Results
+        if: always()
+        run: |
+          echo "passed  : ${{ steps.lighthouse.outputs.passed }}"
+          echo "summary : ${{ steps.lighthouse.outputs.summary }}"

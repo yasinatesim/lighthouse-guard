@@ -1,0 +1,74 @@
+# .github/workflows/lighthouse.yml
+#
+# Lighthouse Guard — Standard Setup
+# ─────────────────────────────────
+# Copy to .github/workflows/lighthouse.yml and set SLACK_WEBHOOK secret.
+#
+# More examples:
+#   examples/quickstart.yml      → minimal 2-minute setup
+#   examples/full-workflow.yml   → all features with detailed comments
+#   examples/local-server.yml    → audit a locally started dev server
+
+name: Lighthouse Performance Check
+
+on:
+  pull_request:
+    branches: [main, develop]
+  push:
+    branches: [main]
+  schedule:
+    - cron: '0 9 * * 1'    # Every Monday at 09:00 UTC
+
+jobs:
+  lighthouse:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Chrome
+        uses: browser-actions/setup-chrome@v1
+        with:
+          chrome-version: stable
+
+      - name: Run Lighthouse Guard
+        uses: yasinatesim/lighthouse-guard@v1
+        id: lighthouse
+        with:
+          urls: |
+            [
+              {"url": "https://your-site.com",       "name": "Home"},
+              {"url": "https://your-site.com/about",  "name": "About"}
+            ]
+
+          # 3 measurements → median score (eliminates outliers)
+          runs: 3
+          strategy: median
+          devices: mobile,desktop
+
+          # Pipeline breaks if any score falls below these values
+          performance-threshold: 80
+          accessibility-threshold: 90
+          seo-threshold: 85
+          best-practices-threshold: 80
+          fail-on-threshold: true
+
+          # Ban protection: random jitter added automatically (+0–30%)
+          delay-between-runs: 10000
+          delay-between-pages: 15000
+          max-retries: 3
+
+          # Slack notification (set SLACK_WEBHOOK in Settings → Secrets)
+          slack-webhook: ${{ secrets.SLACK_WEBHOOK }}
+
+          # Posts score table as a PR comment
+          github-token: ${{ github.token }}
+
+          # Dashboard → Actions → Artifacts → lighthouse-dashboard → open index.html
+          upload-dashboard: true
+
+      - name: Show Results
+        if: always()
+        run: |
+          echo "passed  : ${{ steps.lighthouse.outputs.passed }}"
+          echo "summary : ${{ steps.lighthouse.outputs.summary }}"

@@ -1,0 +1,34 @@
+# .github/workflows/lighthouse-quickstart.yml
+#
+# Lighthouse Guard — Minimal Setup
+# ─────────────────────────────────
+# Copy this to .github/workflows/ to get started in under 2 minutes.
+# Dashboard artifact is always uploaded — download from Actions → Artifacts.
+
+name: Lighthouse
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  lighthouse:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Chrome
+        uses: browser-actions/setup-chrome@v1
+        with:
+          chrome-version: stable
+
+      - name: Run Lighthouse Guard
+        uses: yasinatesim/lighthouse-guard@v1
+        with:
+          urls: |
+            [
+              {"url": "https://your-site.com", "name": "Home"}
+            ]
+          performance-threshold: 80
+          accessibility-threshold: 90
+          fail-on-threshold: true

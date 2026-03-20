@@ -1,0 +1,64 @@
+{
+  "name": "lighthouse-guard",
+  "version": "1.0.0",
+  "description": "Stabil Lighthouse CI - Ban korumalı, retry destekli, çoklu ölçüm",
+  "main": "dist/runner.js",
+  "types": "dist/runner.d.ts",
+  "scripts": {
+    "build": "tsc && ncc build src/action/index.ts -o dist/action --source-map --license licenses.txt && cp src/dashboard/index.html dist/action/dashboard.html",
+    "build:ts": "tsc",
+    "type-check": "tsc --noEmit",
+    "lint": "eslint src/**/*.ts --fix",
+    "test": "jest",
+    "test:coverage": "jest --coverage"
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "node",
+    "testMatch": ["**/src/__tests__/**/*.test.ts"],
+    "coverageDirectory": "coverage",
+    "collectCoverageFrom": [
+      "src/**/*.ts",
+      "!src/dashboard/**",
+      "!src/action/index.ts"
+    ]
+  },
+  "keywords": [
+    "lighthouse",
+    "performance",
+    "ci",
+    "github-actions",
+    "web-vitals",
+    "core-web-vitals",
+    "devops",
+    "retry",
+    "rate-limit"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "@actions/artifact": "^2.1.11",
+    "@actions/core": "^1.10.1",
+    "@actions/github": "^6.0.0",
+    "chrome-launcher": "^1.1.2",
+    "lighthouse": "^12.2.1"
+  },
+  "devDependencies": {
+    "@types/jest": "^30.0.0",
+    "@types/node": "^20.11.0",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "@vercel/ncc": "^0.38.1",
+    "eslint": "^8.56.0",
+    "jest": "^30.3.0",
+    "ts-jest": "^29.4.6",
+    "typescript": "^5.3.3"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "files": [
+    "dist",
+    "action.yml",
+    "README.md"
+  ]
+}
