@@ -5,7 +5,7 @@
   "main": "dist/runner.js",
   "types": "dist/runner.d.ts",
   "scripts": {
-    "build": "tsc && ncc build src/action/index.ts -o dist/action --source-map --license licenses.txt && cp src/dashboard/index.html dist/action/dashboard.html && echo '{\"type\":\"commonjs\"}' > dist/action/package.json",
+    "build": "tsc && node scripts/build.mjs",
     "build:ts": "tsc",
     "type-check": "tsc --noEmit",
     "lint": "eslint src/**/*.ts --fix",
@@ -15,7 +15,9 @@
   "jest": {
     "preset": "ts-jest",
     "testEnvironment": "node",
-    "testMatch": ["**/src/__tests__/**/*.test.ts"],
+    "testMatch": [
+      "**/src/__tests__/**/*.test.ts"
+    ],
     "coverageDirectory": "coverage",
     "collectCoverageFrom": [
       "src/**/*.ts",
@@ -48,6 +50,7 @@
     "@typescript-eslint/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^6.0.0",
     "@vercel/ncc": "^0.38.1",
+    "esbuild": "^0.27.4",
     "eslint": "^8.56.0",
     "jest": "^30.3.0",
     "ts-jest": "^29.4.6",
