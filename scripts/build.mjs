@@ -134,6 +134,7 @@ await build({
   platform: 'node',
   target: 'node20',
   format: 'esm',
+  keepNames: true,
   outfile: join(root, 'dist', 'action', 'index.mjs'),
   plugins: [fsShimPlugin],
   banner: {
