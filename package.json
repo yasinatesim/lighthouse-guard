@@ -5,7 +5,7 @@
   "main": "dist/runner.js",
   "types": "dist/runner.d.ts",
   "scripts": {
-    "build": "tsc && ncc build src/action/index.ts -o dist/action --source-map --license licenses.txt && cp src/dashboard/index.html dist/action/dashboard.html",
+    "build": "tsc && ncc build src/action/index.ts -o dist/action --source-map --license licenses.txt && cp src/dashboard/index.html dist/action/dashboard.html && echo '{\"type\":\"commonjs\"}' > dist/action/package.json",
     "build:ts": "tsc",
     "type-check": "tsc --noEmit",
     "lint": "eslint src/**/*.ts --fix",
