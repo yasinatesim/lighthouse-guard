@@ -1,0 +1,1 @@
+{"version":3,"file":"","sourceRoot":"","sources":["file:///home/runner/work/lighthouse-guard/lighthouse-guard/src/notifier.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,SAAS,EAAE,kBAAkB,EAAE,MAAM,SAAS,CAAC;AAExD,qBAAa,QAAQ;IACP,OAAO,CAAC,MAAM,CAAC;gBAAP,MAAM,CAAC,EAAE,kBAAkB,YAAA;IAEzC,MAAM,CAAC,OAAO,EAAE,SAAS,EAAE,GAAG,OAAO,CAAC,IAAI,CAAC;YAcnC,SAAS;YA+DT,WAAW;CAqB1B"}

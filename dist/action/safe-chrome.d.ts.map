@@ -1,0 +1,1 @@
+{"version":3,"file":"","sourceRoot":"","sources":["file:///home/runner/work/lighthouse-guard/lighthouse-guard/src/safe-chrome.ts"],"names":[],"mappings":"AAEA,qBAAa,UAAU;IAIT,OAAO,CAAC,WAAW;IAH/B,OAAO,CAAC,MAAM,CAA8C;IAC5D,OAAO,CAAC,WAAW,CAA+B;gBAE9B,WAAW,EAAE,MAAM,EAAE;IAEnC,MAAM,IAAI,OAAO,CAAC,MAAM,CAAC;IAoCzB,IAAI,IAAI,OAAO,CAAC,IAAI,CAAC;IA6B3B,SAAS,IAAI,OAAO;CAUrB"}
