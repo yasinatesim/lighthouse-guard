@@ -46,6 +46,7 @@ class SafeChrome {
         await this.kill();
         try {
             this.chrome = await chromeLauncher.launch({
+                chromePath: process.env.CHROME_PATH || process.env.CHROMIUM_PATH || undefined,
                 chromeFlags: [
                     ...this.chromeFlags,
                     '--headless=new',
