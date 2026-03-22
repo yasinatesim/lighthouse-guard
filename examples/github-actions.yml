@@ -1,23 +1,21 @@
 # .github/workflows/lighthouse.yml
 #
-# Lighthouse Guard — Standard Setup
-# ─────────────────────────────────
-# Copy to .github/workflows/lighthouse.yml and set SLACK_WEBHOOK secret.
-#
-# More examples:
-#   examples/quickstart.yml      → minimal 2-minute setup
-#   examples/full-workflow.yml   → all features with detailed comments
-#   examples/local-server.yml    → audit a locally started dev server
+# Lighthouse Guard — Standard Setup with Slack + Schedule
+# ─────────────────────────────────────────────────────────
+# 1. Copy to .github/workflows/lighthouse.yml
+# 2. Replace https://your-site.com with your URLs
+# 3. Add SLACK_WEBHOOK to Settings → Secrets → Actions (optional)
+# 4. Push
 
 name: Lighthouse Performance Check
 
 on:
   pull_request:
-    branches: [main, develop]
+    branches: [main, master]
   push:
-    branches: [main]
+    branches: [main, master]
   schedule:
-    - cron: '0 9 * * 1'    # Every Monday at 09:00 UTC
+    - cron: '0 9 * * 1'  # Every Monday at 09:00 UTC
 
 jobs:
   lighthouse:
@@ -37,8 +35,10 @@ jobs:
         with:
           urls: |
             [
-              {"url": "https://your-site.com",       "name": "Home"},
-              {"url": "https://your-site.com/about",  "name": "About"}
+              {"url": "https://your-site.com/",        "name": "Home"},
+              {"url": "https://your-site.com/about",   "name": "About"},
+              {"url": "https://your-site.com/blog",    "name": "Blog"},
+              {"url": "https://your-site.com/contact", "name": "Contact"}
             ]
 
           # 3 measurements → median score (eliminates outliers)
@@ -53,12 +53,12 @@ jobs:
           best-practices-threshold: 80
           fail-on-threshold: true
 
-          # Ban protection: random jitter added automatically (+0–30%)
+          # Ban protection: random jitter added automatically (+0-30%)
           delay-between-runs: 10000
           delay-between-pages: 15000
           max-retries: 3
 
-          # Slack notification (set SLACK_WEBHOOK in Settings → Secrets)
+          # Slack notification (add SLACK_WEBHOOK to repo secrets)
           slack-webhook: ${{ secrets.SLACK_WEBHOOK }}
 
           # Posts score table as a PR comment

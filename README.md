@@ -39,6 +39,11 @@ Single-run Lighthouse in CI pipelines leads to:
 ## Quick Start
 
 ```yaml
+- name: Install Chrome
+  uses: browser-actions/setup-chrome@v1
+  with:
+    chrome-version: stable
+
 - name: Run Lighthouse Guard
   uses: yasinatesim/lighthouse-guard@v1
   with:
@@ -52,6 +57,18 @@ Single-run Lighthouse in CI pipelines leads to:
 ```
 
 That's it. Results appear as a GitHub Job Summary, PR comment, and downloadable dashboard artifact.
+
+> **Note:** `browser-actions/setup-chrome@v1` is required before the action — it installs Chrome and sets `CHROME_PATH` automatically.
+
+---
+
+## Real-World Example
+
+This action is used in production on **[yasinatesim/yasinates.com](https://github.com/yasinatesim/yasinates.com)** — a personal portfolio built with TanStack Start + React.
+
+You can see it running live on the **[feature/mfe-migration PR](https://github.com/yasinatesim/yasinates.com/pull/49)** — the workflow audits 6 pages across 2 devices (mobile + desktop) with 3 runs each on every push and PR.
+
+The workflow file: [`.github/workflows/lighthouse.yml`](https://github.com/yasinatesim/yasinates.com/blob/master/.github/workflows/lighthouse.yml)
 
 ---
 

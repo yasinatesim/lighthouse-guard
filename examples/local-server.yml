@@ -1,23 +1,21 @@
 # .github/workflows/lighthouse-local.yml
 #
-# Lighthouse Guard — Testing a Locally Running Application
+# Lighthouse Guard — Audit a Locally Running Dev Server
 # ─────────────────────────────────────────────────────────────────────────────
-# Use this pattern when you want to audit your app BEFORE it's deployed.
-# The workflow:
-#   1. Checks out the code
-#   2. Builds and starts your application on localhost
-#   3. Waits until it's ready
-#   4. Runs Lighthouse against localhost
-#   5. Kills the server and reports results
+# Use this when you want to audit your app BEFORE it's deployed.
+# Works with: Next.js, Vite, Nuxt, SvelteKit, Express, etc.
 #
-# Works with: Next.js, Express, Vite, Create React App, Nuxt, SvelteKit, etc.
+# 1. Copy to .github/workflows/lighthouse-local.yml
+# 2. Adjust the build/start commands for your stack
+# 3. Update the localhost URLs to match your routes
+# 4. Push
 # ─────────────────────────────────────────────────────────────────────────────
 
 name: Lighthouse (Local Server)
 
 on:
   pull_request:
-    branches: [main]
+    branches: [main, master]
 
 jobs:
   lighthouse:
@@ -27,7 +25,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # ── Setup ─────────────────────────────────────────────────────────────
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
@@ -39,37 +36,32 @@ jobs:
         with:
           chrome-version: stable
 
-      # ── Build & Start App ─────────────────────────────────────────────────
-      # Adjust these commands for your stack:
-      #   Next.js   →  npm run build && npm start
-      #   Vite      →  npm run build && npx serve dist -p 3000
-      #   Express   →  node server.js
-      #   Django    →  python manage.py runserver 0.0.0.0:3000
       - name: Install dependencies
         run: npm ci
 
+      # Adjust for your stack:
+      #   Next.js    →  npm run build && npm start
+      #   Vite       →  npm run build && npx serve dist -p 3000
+      #   SvelteKit  →  npm run build && node build/index.js
       - name: Build application
         run: npm run build
 
       - name: Start application
-        run: npm start &                   # & runs in background
+        run: npm start &
         env:
           PORT: 3000
           NODE_ENV: production
 
-      # ── Wait until server is ready ─────────────────────────────────────────
-      # wait-on polls the URL every second until it responds or timeout expires.
-      - name: Wait for server
+      - name: Wait for server to be ready
         run: npx wait-on http://localhost:3000 --timeout 60000
 
-      # ── Lighthouse Guard against localhost ────────────────────────────────
       - name: Run Lighthouse Guard
         uses: yasinatesim/lighthouse-guard@v1
         id: lighthouse
         with:
           urls: |
             [
-              {"url": "http://localhost:3000",         "name": "Home"},
+              {"url": "http://localhost:3000/",        "name": "Home"},
               {"url": "http://localhost:3000/about",   "name": "About"},
               {"url": "http://localhost:3000/contact", "name": "Contact"}
             ]
@@ -78,19 +70,17 @@ jobs:
           devices: mobile,desktop
           performance-threshold: 85
           accessibility-threshold: 90
-          seo-threshold: 80
+          seo-threshold: 85
           best-practices-threshold: 80
           fail-on-threshold: true
-          # No delay needed for localhost — same machine, no ban risk
-          delay-between-runs: 0
-          delay-between-pages: 2000
+          # No delay needed for localhost — no ban risk
+          delay-between-runs: 2000
+          delay-between-pages: 3000
           max-retries: 2
-          slack-webhook: ${{ secrets.SLACK_WEBHOOK }}
           github-token: ${{ github.token }}
           upload-dashboard: true
 
-      # ── Results ───────────────────────────────────────────────────────────
-      - name: Print Results
+      - name: Show Results
         if: always()
         run: |
           echo "passed  : ${{ steps.lighthouse.outputs.passed }}"

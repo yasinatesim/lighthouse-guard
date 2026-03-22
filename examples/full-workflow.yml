@@ -1,31 +1,34 @@
 # .github/workflows/lighthouse.yml
 #
-# Lighthouse Guard — Full Workflow
+# Lighthouse Guard — Full Workflow (all features)
 # ─────────────────────────────────────────────────────────────────────────────
-# Demonstrates:
-#   ✅ Dashboard artifact upload  →  download from Actions → Artifacts
-#   ✅ Slack notification          →  sent on every run, @mention on failure
-#   ✅ PR comment                  →  score table posted to the pull request
-#   ✅ Pipeline breaking           →  job fails when scores are below threshold
-#   ✅ Multi-device testing        →  mobile + desktop in one run
-#   ✅ Multiple pages              →  each page gets its own threshold config
-#   ✅ Ban protection              →  delay-between-runs prevents IP bans
-#   ✅ Retry on flakiness          →  max-retries recovers from Chrome crashes
+# 1. Copy to .github/workflows/lighthouse.yml
+# 2. Replace https://your-site.com with your URLs
+# 3. Add SLACK_WEBHOOK to Settings → Secrets → Actions (optional)
+# 4. Push
 #
-# Required secrets (Settings → Secrets → Actions):
-#   SLACK_WEBHOOK  →  https://hooks.slack.com/services/xxx/yyy/zzz
-#
+# Features demonstrated:
+#   ✅ Multi-page audit        →  6 pages tested per run
+#   ✅ Multi-device testing    →  mobile + desktop
+#   ✅ 3-run median strategy   →  outliers eliminated
+#   ✅ Score thresholds        →  pipeline breaks on regression
+#   ✅ Ban protection          →  jittered delays between requests
+#   ✅ Auto-retry              →  Chrome crash recovery
+#   ✅ PR comment              →  score table on every PR
+#   ✅ Slack notification      →  pass/fail + scores
+#   ✅ Dashboard artifact      →  download from Actions → Artifacts
+#   ✅ Scheduled audit         →  runs every Monday morning
 # ─────────────────────────────────────────────────────────────────────────────
 
-name: Lighthouse Performance Guard
+name: Lighthouse Performance Check
 
 on:
   pull_request:
-    branches: [main, develop]
+    branches: [main, master]
   push:
-    branches: [main]
+    branches: [main, master]
   schedule:
-    - cron: '0 9 * * 1-5'    # Weekdays at 09:00 UTC
+    - cron: '0 9 * * 1'  # Every Monday at 09:00 UTC
 
 jobs:
   lighthouse:
@@ -35,114 +38,58 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # ── Chrome ────────────────────────────────────────────────────────────
       - name: Install Chrome
         uses: browser-actions/setup-chrome@v1
         with:
           chrome-version: stable
 
-      # ── Lighthouse Guard ──────────────────────────────────────────────────
-      #
-      # What happens:
-      #   1. Runs Lighthouse 3× per URL per device (median eliminates outliers)
-      #   2. Waits delay-between-runs between each measurement (ban protection)
-      #   3. Retries up to 3× if Chrome crashes or returns no result
-      #   4. Aggregates results → compares against per-device thresholds
-      #   5. Posts score table as PR comment (requires github-token)
-      #   6. Sends Slack notification with pass/fail status
-      #   7. Uploads dashboard HTML as artifact (always, even on failure)
-      #   8. Sets job exit code:
-      #        exit 0  →  all scores met thresholds   (pipeline continues ✅)
-      #        exit 1  →  at least one score failed   (pipeline breaks   ❌)
-      #
       - name: Run Lighthouse Guard
         uses: yasinatesim/lighthouse-guard@v1
         id: lighthouse
         with:
           # ── Pages to audit ────────────────────────────────────────────────
-          # JSON array: each page can have its own name (shown in dashboard)
           urls: |
             [
-              {"url": "https://your-site.com",         "name": "Home"},
-              {"url": "https://your-site.com/blog",    "name": "Blog"},
-              {"url": "https://your-site.com/contact", "name": "Contact"}
+              {"url": "https://your-site.com/",         "name": "Home"},
+              {"url": "https://your-site.com/about",    "name": "About"},
+              {"url": "https://your-site.com/blog",     "name": "Blog"},
+              {"url": "https://your-site.com/projects", "name": "Projects"},
+              {"url": "https://your-site.com/contact",  "name": "Contact"}
             ]
 
-          # ── Measurement strategy ──────────────────────────────────────────
-          # runs=3 + strategy=median: takes the middle score of 3 runs.
-          # Eliminates outliers caused by network jitter or cold-start.
+          # ── Measurement ───────────────────────────────────────────────────
+          # 3 runs per page per device — median eliminates outliers
           runs: 3
           strategy: median
-
-          # ── Devices ───────────────────────────────────────────────────────
-          # Both mobile and desktop are audited. Each has the same thresholds
-          # (set below). For per-page per-device thresholds use the JS config.
           devices: mobile,desktop
 
           # ── Score thresholds (0–100) ──────────────────────────────────────
-          # Applied to every page × device combination.
-          # Any score below threshold triggers fail-on-threshold.
+          # Job fails if any page/device falls below these values
           performance-threshold: 80
           accessibility-threshold: 90
-          seo-threshold: 85
+          seo-threshold: 90
           best-practices-threshold: 80
-
-          # ── Pipeline control ──────────────────────────────────────────────
-          # true  → job exit code = 1 when any threshold is missed  ❌
-          # false → scores are recorded but the pipeline never breaks
           fail-on-threshold: true
 
           # ── Ban protection ────────────────────────────────────────────────
-          # delay-between-runs : wait between consecutive measurements of the same URL
-          # delay-between-pages: wait between switching to the next URL
-          # Both include 0–30% random jitter to avoid bot-detection patterns.
-          delay-between-runs: 10000   # 10s  (+ up to 3s jitter)
-          delay-between-pages: 15000  # 15s  (+ up to 4.5s jitter)
-
-          # ── Retry on failure ──────────────────────────────────────────────
-          # If Chrome crashes or Lighthouse returns nothing, retry up to 3×.
-          # Retry delay = retry-delay × attempt (exponential: 15s, 30s, 45s).
-          # graceful-fail: true means a page with 0 successful runs is skipped
-          # rather than aborting the entire pipeline.
+          # Jitter (+0–30%) is added automatically to both delays
+          delay-between-runs: 10000   # 10s between consecutive runs
+          delay-between-pages: 15000  # 15s between pages
           max-retries: 3
 
-          # ── Slack notification ────────────────────────────────────────────
-          # Sends a Slack message after every run.
-          # Message includes: overall pass/fail, per-page scores, failures.
-          # Store the webhook URL in GitHub Secrets (never hardcode it).
+          # ── Notifications & reporting ─────────────────────────────────────
           slack-webhook: ${{ secrets.SLACK_WEBHOOK }}
-
-          # ── PR comment ────────────────────────────────────────────────────
-          # Posts a score table as a comment on the pull request.
-          # Uses the built-in GITHUB_TOKEN — no extra secret needed.
           github-token: ${{ github.token }}
-
-          # ── Dashboard artifact ────────────────────────────────────────────
-          # Uploads an interactive HTML dashboard as a GitHub Actions artifact.
-          # To view:
-          #   1. Go to Actions → select this workflow run
-          #   2. Scroll to "Artifacts" at the bottom
-          #   3. Download "lighthouse-dashboard"
-          #   4. Unzip and open index.html in your browser
-          # The dashboard shows scores, metrics (FCP, LCP, TBT, CLS), and failures.
           upload-dashboard: true
 
-      # ── Print outputs ─────────────────────────────────────────────────────
-      # These are always printed, even when the job fails (if: always()).
-      # Use outputs in downstream jobs with: needs.lighthouse.outputs.passed
-      - name: Print Results
+      # ── Always print outputs, even on failure ─────────────────────────────
+      - name: Show Results
         if: always()
         run: |
-          echo "──────────────────────────────────"
-          echo "  passed  : ${{ steps.lighthouse.outputs.passed }}"
-          echo "  summary : ${{ steps.lighthouse.outputs.summary }}"
-          echo "──────────────────────────────────"
-          echo "Full JSON results:"
-          echo '${{ steps.lighthouse.outputs.results }}' | python3 -m json.tool
+          echo "passed  : ${{ steps.lighthouse.outputs.passed }}"
+          echo "summary : ${{ steps.lighthouse.outputs.summary }}"
 
-      # ── Block deployment on failure ───────────────────────────────────────
-      # This step only runs when the Lighthouse job passes.
-      # Remove it (or set needs: [lighthouse]) to deploy regardless of scores.
-      - name: Deploy (only if Lighthouse passed)
+      # ── Block deploy if Lighthouse failed ─────────────────────────────────
+      - name: Deploy (only if scores pass)
         if: steps.lighthouse.outputs.passed == 'true'
-        run: echo "✅ Scores OK — proceeding to deploy"
+        run: echo "✅ All scores passed — proceeding to deploy"

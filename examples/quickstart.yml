@@ -1,19 +1,28 @@
-# .github/workflows/lighthouse-quickstart.yml
+# .github/workflows/lighthouse.yml
 #
 # Lighthouse Guard — Minimal Setup
 # ─────────────────────────────────
-# Copy this to .github/workflows/ to get started in under 2 minutes.
-# Dashboard artifact is always uploaded — download from Actions → Artifacts.
+# 1. Copy this file to .github/workflows/lighthouse.yml
+# 2. Replace https://your-site.com with your site URL
+# 3. Push — that's it.
+#
+# Results appear as:
+#   • GitHub Job Summary (Actions tab)
+#   • PR comment (score table)
+#   • Downloadable dashboard artifact
 
 name: Lighthouse
 
 on:
   pull_request:
-    branches: [main]
+    branches: [main, master]
+  push:
+    branches: [main, master]
 
 jobs:
   lighthouse:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v4
 
@@ -24,11 +33,30 @@ jobs:
 
       - name: Run Lighthouse Guard
         uses: yasinatesim/lighthouse-guard@v1
+        id: lighthouse
         with:
           urls: |
             [
-              {"url": "https://your-site.com", "name": "Home"}
+              {"url": "https://your-site.com/",        "name": "Home"},
+              {"url": "https://your-site.com/about",   "name": "About"},
+              {"url": "https://your-site.com/contact", "name": "Contact"}
             ]
+          runs: 3
+          strategy: median
+          devices: mobile,desktop
           performance-threshold: 80
           accessibility-threshold: 90
+          seo-threshold: 85
+          best-practices-threshold: 80
           fail-on-threshold: true
+          delay-between-runs: 10000
+          delay-between-pages: 15000
+          max-retries: 3
+          github-token: ${{ github.token }}
+          upload-dashboard: true
+
+      - name: Show Results
+        if: always()
+        run: |
+          echo "passed  : ${{ steps.lighthouse.outputs.passed }}"
+          echo "summary : ${{ steps.lighthouse.outputs.summary }}"
