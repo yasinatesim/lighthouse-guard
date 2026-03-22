@@ -196,7 +196,9 @@ class LighthouseGuard {
             };
             return { scores, metrics };
         }
-        catch {
+        catch (e) {
+            const msg = e instanceof Error ? e.message : String(e);
+            console.log(`      💥 Lighthouse error: ${msg}`);
             return null;
         }
     }
