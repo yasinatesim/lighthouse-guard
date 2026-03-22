@@ -1,51 +1,51 @@
-import{createRequire as __cjsReq}from'module';const __baseReq=__cjsReq(import.meta.url);const __vRes={'axe-core/axe.min.js':'axe-core/axe.min.js','js-library-detector/library/libraries.js':'js-library-detector/library/libraries.js'};const require=Object.assign((...a)=>__baseReq(...a),{...(__baseReq),resolve(m,...a){return __vRes[m]??__baseReq.resolve(m,...a);}});
+import{createRequire as __cjsReq}from'module';const require=__cjsReq(import.meta.url);
 import {
   require_SDK,
   source_maps_default
-} from "./chunk-DQIUDL3S.js";
+} from "./chunk-J6ARWDJP.js";
 import {
   trace_default
-} from "./chunk-QDE2QHJ5.js";
-import "./chunk-XVYQYPAA.js";
+} from "./chunk-NE4YDJKR.js";
+import "./chunk-NESHVRVI.js";
 import {
   Sentry
-} from "./chunk-WB2OF2LL.js";
+} from "./chunk-6BP73N5Z.js";
 import {
   TraceProcessor
-} from "./chunk-JRAJ3QIZ.js";
+} from "./chunk-NUK2ASLP.js";
 import {
   Processor_exports,
   handlers_exports,
   helpers_exports,
   insights_exports,
   makeComputedArtifact
-} from "./chunk-62BSSGB3.js";
+} from "./chunk-KXSLIBMH.js";
 import {
   resolveNodeIdToObjectId
-} from "./chunk-GSA6V4GF.js";
+} from "./chunk-2VOQBKE3.js";
 import {
   ExecutionContext
-} from "./chunk-2INHUWZH.js";
+} from "./chunk-FP565QWJ.js";
 import {
   LighthouseError,
   createIcuMessageFn
-} from "./chunk-GO42M3MA.js";
+} from "./chunk-BHMCITMD.js";
 import {
   lighthouse_logger_default
-} from "./chunk-VDXIC3K2.js";
-import "./chunk-YWWNWPSO.js";
-import "./chunk-7CCOEJTA.js";
+} from "./chunk-FOYXSDFQ.js";
+import "./chunk-C5HPB2FB.js";
+import "./chunk-7FMDRUEI.js";
 import {
   pageFunctions
-} from "./chunk-GO4LGQT6.js";
-import "./chunk-5LGJRNXS.js";
+} from "./chunk-RDNFCTTE.js";
+import "./chunk-SLD7CHCU.js";
 import {
   base_gatherer_default
-} from "./chunk-BYDJSNVN.js";
+} from "./chunk-3PE3GB6I.js";
 import {
   __name,
   __toESM
-} from "./chunk-TE5Z3W7Q.js";
+} from "./chunk-XE6XARIN.js";
 
 // node_modules/lighthouse/core/lib/lh-trace-processor.js
 var LHTraceProcessor = class extends TraceProcessor {

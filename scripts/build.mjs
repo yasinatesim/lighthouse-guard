@@ -140,6 +140,35 @@ const __patchedDefault = Object.assign(Object.create(null), realFs, {
 export default __patchedDefault;
 `.trim())
 
+/**
+ * esbuild plugin: inline files that lighthouse reads via require.resolve()+readFileSync at runtime.
+ * lighthouse's own build uses an 'inline-fs' plugin for this; we replicate the same pattern.
+ * Affected files: core/lib/axe.js (axe-core) and core/gather/gatherers/stacks.js (js-library-detector)
+ */
+const axeSource = readFileSync(join(root, 'node_modules', 'axe-core', 'axe.min.js'), 'utf8')
+const librariesSource = readFileSync(join(root, 'node_modules', 'js-library-detector', 'library', 'libraries.js'), 'utf8')
+const inlineResolvePlugin = {
+  name: 'inline-resolve',
+  setup(b) {
+    b.onLoad({ filter: /lighthouse\/core\/lib\/axe\.js$/ }, (args) => {
+      let src = readFileSync(args.path, 'utf8')
+      src = src.replace(
+        /fs\.readFileSync\s*\(\s*require\.resolve\s*\(\s*['"]axe-core\/axe\.min\.js['"]\s*\)\s*,\s*['"]utf8['"]\s*\)/,
+        JSON.stringify(axeSource)
+      )
+      return { contents: src, loader: 'js' }
+    })
+    b.onLoad({ filter: /lighthouse\/core\/gather\/gatherers\/stacks\.js$/ }, (args) => {
+      let src = readFileSync(args.path, 'utf8')
+      src = src.replace(
+        /fs\.readFileSync\s*\(\s*require\.resolve\s*\(\s*['"]js-library-detector\/library\/libraries\.js['"]\s*\)\s*,\s*['"]utf8['"]\s*\)/,
+        JSON.stringify(librariesSource)
+      )
+      return { contents: src, loader: 'js' }
+    })
+  },
+}
+
 /** esbuild plugin: redirect any import of 'fs' to our shim (except from the shim itself) */
 const fsShimPlugin = {
   name: 'fs-shim',
@@ -163,7 +192,7 @@ await build({
   format: 'esm',
   keepNames: true,  // required: lighthouse's createEsbuildFunctionWrapper detects __name pattern
   outfile: join(root, 'dist', 'action', 'index.mjs'),
-  plugins: [fsShimPlugin],
+  plugins: [inlineResolvePlugin, fsShimPlugin],
   banner: {
     js: [
       // Force isBundledEnvironment()=true so lighthouse always injects __name into browser evals
@@ -216,14 +245,8 @@ await build({
   keepNames: true,
   outbase: gathererSrcDir,
   outdir: join(root, 'dist', 'gather', 'gatherers'),
-  plugins: [fsShimPlugin],  // redirects import 'fs' to shim with embedded assets
-  banner: { js: [
-    `import{createRequire as __cjsReq}from'module';`,
-    `const __baseReq=__cjsReq(import.meta.url);`,
-    // Patch require.resolve for external files embedded as virtual assets (no node_modules on CI)
-    `const __vRes={'axe-core/axe.min.js':'axe-core/axe.min.js','js-library-detector/library/libraries.js':'js-library-detector/library/libraries.js'};`,
-    `const require=Object.assign((...a)=>__baseReq(...a),{...(__baseReq),resolve(m,...a){return __vRes[m]??__baseReq.resolve(m,...a);}});`,
-  ].join('') },
+  plugins: [inlineResolvePlugin, fsShimPlugin],  // redirects import 'fs' to shim with embedded assets
+  banner: { js: `import{createRequire as __cjsReq}from'module';const require=__cjsReq(import.meta.url);` },
   logLevel: 'warning',
 })
 console.log(`  → ${gathererEntries.length} gatherers bundled`)
@@ -258,7 +281,7 @@ await build({
   keepNames: true,
   outbase: auditSrcDir,
   outdir: join(root, 'dist', 'audits'),
-  plugins: [fsShimPlugin],
+  plugins: [inlineResolvePlugin, fsShimPlugin],
   banner: { js: `import{createRequire as __cjsReq}from'module';const require=__cjsReq(import.meta.url);` },
   logLevel: 'warning',
 })
