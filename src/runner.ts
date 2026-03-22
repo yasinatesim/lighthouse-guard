@@ -234,7 +234,9 @@ export class LighthouseGuard {
       return { scores, metrics };
     } catch (e: unknown) {
       const msg = e instanceof Error ? e.message : String(e);
+      const stack = e instanceof Error ? e.stack : '';
       console.log(`      💥 Lighthouse error: ${msg}`);
+      if (stack) console.log(`         Stack: ${stack.split('\n').slice(1, 4).join(' | ')}`);
       return null;
     }
   }

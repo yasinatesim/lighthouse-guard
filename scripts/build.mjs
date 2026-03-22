@@ -61,6 +61,9 @@ const assets = {
   'package.json': readFileSync(join(lhDir, 'package.json'), 'utf8'),
   // Directory listings for paths lighthouse scans via readdirSync at runtime.
   // The actual code is already bundled; we only need the filenames for lookup.
+  // JSON data files read at runtime by audits (e.g. legacy-javascript polyfill data)
+  ...collectAssets(join(lhDir, 'core'), 'core', ['.json']),
+  // Directory listings for readdirSync calls
   ...collectDirListing(join(lhDir, 'core', 'gather', 'gatherers'), 'gather/gatherers'),
   ...collectDirListing(join(lhDir, 'core', 'audits'), 'audits'),
   ...collectDirListing(join(lhDir, 'core', 'config'), 'config'),
@@ -155,13 +158,18 @@ await build({
   platform: 'node',
   target: 'node20',
   format: 'esm',
-  keepNames: true,
+  // keepNames: true is intentionally omitted — it injects __name() calls inside
+  // serialized functions that lighthouse injects into Chrome, causing browser errors.
+  // Instead we provide a no-op __name in the banner so lighthouse's detection works.
   outfile: join(root, 'dist', 'action', 'index.mjs'),
   plugins: [fsShimPlugin],
   banner: {
     js: [
       `import{createRequire as __cjsReq}from'module';`,
       `const __realReq=__cjsReq(import.meta.url);`,
+      // no-op __name: satisfies lighthouse's createEsbuildFunctionWrapper detection
+      // without generating __name() calls inside browser-injected function bodies
+      `var __name=(target,value)=>target;`,
       `const __lhA=${JSON.stringify(assets)};`,
       `const __lhAK=Object.keys(__lhA);`,
       // Build virtual directory index for readdirSync
@@ -179,31 +187,78 @@ await build({
   logLevel: 'warning',
 })
 
-// Cleanup temp shim
-import { unlinkSync } from 'fs'
-try { unlinkSync(shimPath) } catch {}
-
 // Build individual gatherer bundles at dist/gather/gatherers/
 // Lighthouse does dynamic import() with computed paths at runtime:
 //   import.meta.url = dist/action/index.mjs → ../gather/gatherers/foo.js
 //   resolves to dist/gather/gatherers/foo.js — these files must exist on disk.
 console.log('Bundling gatherers...')
 const gathererSrcDir = join(lhDir, 'core', 'gather', 'gatherers')
-const gathererEntries = readdirSync(gathererSrcDir, { withFileTypes: true })
-  .filter(e => !e.isDirectory() && extname(e.name) === '.js')
-  .map(e => join(gathererSrcDir, e.name))
+function collectJsFiles(dir) {
+  const files = []
+  for (const e of readdirSync(dir, { withFileTypes: true })) {
+    if (e.isDirectory()) {
+      files.push(...collectJsFiles(join(dir, e.name)))
+    } else if (extname(e.name) === '.js') {
+      files.push(join(dir, e.name))
+    }
+  }
+  return files
+}
+const gathererEntries = collectJsFiles(gathererSrcDir)
 mkdirSync(join(root, 'dist', 'gather', 'gatherers'), { recursive: true })
 await build({
   entryPoints: gathererEntries,
   bundle: true,
+  splitting: true,  // shared lighthouse core (Symbols, deps + shim) goes into ONE chunk
   platform: 'node',
   target: 'node20',
   format: 'esm',
-  keepNames: true,
+  outbase: gathererSrcDir,
   outdir: join(root, 'dist', 'gather', 'gatherers'),
+  plugins: [fsShimPlugin],  // redirects import 'fs' to shim with embedded assets
+  banner: { js: `import{createRequire as __cjsReq}from'module';const require=__cjsReq(import.meta.url);` },
   logLevel: 'warning',
 })
 console.log(`  → ${gathererEntries.length} gatherers bundled`)
+
+// Gatherer bundles also initialize lighthouse's i18n, which reads locale files
+// relative to their own import.meta.url (dist/gather/gatherers/locales/).
+const gathererLocalesDir = join(root, 'dist', 'gather', 'gatherers', 'locales')
+mkdirSync(gathererLocalesDir, { recursive: true })
+const srcLocales = join(lhDir, 'shared', 'localization', 'locales')
+for (const f of readdirSync(srcLocales)) {
+  copyFileSync(join(srcLocales, f), join(gathererLocalesDir, f))
+}
+
+// lighthouse reads package.json one level above gatherers (dist/gather/package.json)
+mkdirSync(join(root, 'dist', 'gather'), { recursive: true })
+copyFileSync(join(lhDir, 'package.json'), join(root, 'dist', 'gather', 'package.json'))
+
+// Build individual audit bundles at dist/audits/
+// Same dynamic import() pattern as gatherers:
+//   dist/action/index.mjs → ../audits/is-on-https.js → dist/audits/is-on-https.js
+console.log('Bundling audits...')
+const auditSrcDir = join(lhDir, 'core', 'audits')
+const auditEntries = collectJsFiles(auditSrcDir)
+mkdirSync(join(root, 'dist', 'audits'), { recursive: true })
+await build({
+  entryPoints: auditEntries,
+  bundle: true,
+  splitting: true,
+  platform: 'node',
+  target: 'node20',
+  format: 'esm',
+  outbase: auditSrcDir,
+  outdir: join(root, 'dist', 'audits'),
+  plugins: [fsShimPlugin],
+  banner: { js: `import{createRequire as __cjsReq}from'module';const require=__cjsReq(import.meta.url);` },
+  logLevel: 'warning',
+})
+console.log(`  → ${auditEntries.length} audits bundled`)
+
+// Cleanup temp shim (used by all three builds)
+import { unlinkSync } from 'fs'
+try { unlinkSync(shimPath) } catch {}
 
 copyFileSync(join(root, 'src', 'dashboard', 'index.html'), join(root, 'dist', 'action', 'dashboard.html'))
 console.log('Build complete → dist/action/index.mjs')
