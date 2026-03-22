@@ -1,18 +1,18 @@
-import{createRequire as __cjsReq}from'module';const require=__cjsReq(import.meta.url);
+import{createRequire as __cjsReq}from'module';const __baseReq=__cjsReq(import.meta.url);const __vRes={'axe-core/axe.min.js':'axe-core/axe.min.js','js-library-detector/library/libraries.js':'js-library-detector/library/libraries.js'};const require=Object.assign((...a)=>__baseReq(...a),{...(__baseReq),resolve(m,...a){return __vRes[m]??__baseReq.resolve(m,...a);}});
 import {
   lighthouse_logger_default
-} from "./chunk-FOYXSDFQ.js";
-import "./chunk-C5HPB2FB.js";
+} from "./chunk-VDXIC3K2.js";
+import "./chunk-YWWNWPSO.js";
 import {
   init_shim_fs,
   shim_fs_default
-} from "./chunk-DQQIQ7YS.js";
+} from "./chunk-7CCOEJTA.js";
 import {
   base_gatherer_default
-} from "./chunk-3PE3GB6I.js";
+} from "./chunk-BYDJSNVN.js";
 import {
   __name
-} from "./chunk-XE6XARIN.js";
+} from "./chunk-TE5Z3W7Q.js";
 
 // node_modules/lighthouse/core/gather/gatherers/stacks.js
 init_shim_fs();

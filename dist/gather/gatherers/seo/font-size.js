@@ -1,11 +1,11 @@
-import{createRequire as __cjsReq}from'module';const require=__cjsReq(import.meta.url);
+import{createRequire as __cjsReq}from'module';const __baseReq=__cjsReq(import.meta.url);const __vRes={'axe-core/axe.min.js':'axe-core/axe.min.js','js-library-detector/library/libraries.js':'js-library-detector/library/libraries.js'};const require=Object.assign((...a)=>__baseReq(...a),{...(__baseReq),resolve(m,...a){return __vRes[m]??__baseReq.resolve(m,...a);}});
 import {
   findMostSpecificMatchedCSSRule,
   font_size_default,
   getEffectiveFontRule
-} from "../chunk-5E7JPS6Z.js";
-import "../chunk-3PE3GB6I.js";
-import "../chunk-XE6XARIN.js";
+} from "../chunk-YOBGMED4.js";
+import "../chunk-BYDJSNVN.js";
+import "../chunk-TE5Z3W7Q.js";
 export {
   font_size_default as default,
   findMostSpecificMatchedCSSRule,

@@ -67,6 +67,9 @@ const assets = {
   ...collectDirListing(join(lhDir, 'core', 'gather', 'gatherers'), 'gather/gatherers'),
   ...collectDirListing(join(lhDir, 'core', 'audits'), 'audits'),
   ...collectDirListing(join(lhDir, 'core', 'config'), 'config'),
+  // External files read via require.resolve()+readFileSync at runtime (no node_modules on CI)
+  'axe-core/axe.min.js': readFileSync(join(root, 'node_modules', 'axe-core', 'axe.min.js'), 'utf8'),
+  'js-library-detector/library/libraries.js': readFileSync(join(root, 'node_modules', 'js-library-detector', 'library', 'libraries.js'), 'utf8'),
 }
 console.log(`  → ${Object.keys(assets).length} assets collected`)
 
@@ -214,7 +217,13 @@ await build({
   outbase: gathererSrcDir,
   outdir: join(root, 'dist', 'gather', 'gatherers'),
   plugins: [fsShimPlugin],  // redirects import 'fs' to shim with embedded assets
-  banner: { js: `import{createRequire as __cjsReq}from'module';const require=__cjsReq(import.meta.url);` },
+  banner: { js: [
+    `import{createRequire as __cjsReq}from'module';`,
+    `const __baseReq=__cjsReq(import.meta.url);`,
+    // Patch require.resolve for external files embedded as virtual assets (no node_modules on CI)
+    `const __vRes={'axe-core/axe.min.js':'axe-core/axe.min.js','js-library-detector/library/libraries.js':'js-library-detector/library/libraries.js'};`,
+    `const require=Object.assign((...a)=>__baseReq(...a),{...(__baseReq),resolve(m,...a){return __vRes[m]??__baseReq.resolve(m,...a);}});`,
+  ].join('') },
   logLevel: 'warning',
 })
 console.log(`  → ${gathererEntries.length} gatherers bundled`)
