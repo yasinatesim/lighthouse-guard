@@ -10,7 +10,12 @@
     "type-check": "tsc --noEmit",
     "lint": "eslint src/**/*.ts --fix",
     "test": "jest",
-    "test:coverage": "jest --coverage"
+    "test:coverage": "jest --coverage",
+    "test:bundle": "node scripts/__tests__/run-all.mjs",
+    "test:bundle:quickstart": "node scripts/__tests__/test-quickstart.mjs",
+    "test:bundle:github-actions": "node scripts/__tests__/test-github-actions.mjs",
+    "test:bundle:full-workflow": "node scripts/__tests__/test-full-workflow.mjs",
+    "test:bundle:local-server": "node scripts/__tests__/test-local-server.mjs"
   },
   "jest": {
     "preset": "ts-jest",
