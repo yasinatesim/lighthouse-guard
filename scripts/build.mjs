@@ -15,6 +15,22 @@ const __dirname = dirname(fileURLToPath(import.meta.url))
 const root = join(__dirname, '..')
 const lhDir = join(root, 'node_modules', 'lighthouse')
 
+// Only records filenames (empty content) — for satisfying readdirSync calls on
+// directories whose actual code is already bundled by esbuild.
+function collectDirListing(dir, prefix, exts = ['.js']) {
+  if (!existsSync(dir)) return {}
+  const result = {}
+  for (const entry of readdirSync(dir, { withFileTypes: true })) {
+    const rel = `${prefix}/${entry.name}`
+    if (entry.isDirectory()) {
+      Object.assign(result, collectDirListing(join(dir, entry.name), rel, exts))
+    } else if (exts.includes(extname(entry.name))) {
+      result[rel] = '' // empty placeholder — only the key matters for dir listing
+    }
+  }
+  return result
+}
+
 function collectAssets(dir, prefix, exts = ['.json', '.html', '.css']) {
   if (!existsSync(dir)) return {}
   const result = {}
@@ -43,6 +59,11 @@ const assets = {
   ...collectAssets(join(lhDir, 'dist', 'report'), 'dist/report', ['.js']),
   ...collectAssets(join(lhDir, 'treemap'), 'treemap'),
   'package.json': readFileSync(join(lhDir, 'package.json'), 'utf8'),
+  // Directory listings for paths lighthouse scans via readdirSync at runtime.
+  // The actual code is already bundled; we only need the filenames for lookup.
+  ...collectDirListing(join(lhDir, 'core', 'gather', 'gatherers'), 'gather/gatherers'),
+  ...collectDirListing(join(lhDir, 'core', 'audits'), 'audits'),
+  ...collectDirListing(join(lhDir, 'core', 'config'), 'config'),
 }
 console.log(`  → ${Object.keys(assets).length} assets collected`)
 
