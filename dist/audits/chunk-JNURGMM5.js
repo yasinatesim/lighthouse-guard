@@ -1,0 +1,92 @@
+import{createRequire as __cjsReq}from'module';const require=__cjsReq(import.meta.url);
+import {
+  SpeedlineComputed
+} from "./chunk-TXZEEGMI.js";
+import {
+  NavigationMetric
+} from "./chunk-DGRQI5GC.js";
+import {
+  LanternFirstContentfulPaintComputed,
+  getComputationDataParams,
+  lanternErrorAdapter
+} from "./chunk-YN3ARENP.js";
+import {
+  metrics_exports
+} from "./chunk-JDNHHZFJ.js";
+import {
+  makeComputedArtifact
+} from "./chunk-MLADMIB3.js";
+
+// node_modules/lighthouse/core/computed/metrics/lantern-speed-index.js
+var LanternSpeedIndex = class extends metrics_exports.SpeedIndex {
+  /**
+   * @param {LH.Artifacts.MetricComputationDataInput} data
+   * @param {LH.Artifacts.ComputedContext} context
+   * @param {Omit<Lantern.Metrics.Extras, 'optimistic'>=} extras
+   * @return {Promise<LH.Artifacts.LanternMetric>}
+   */
+  static async computeMetricWithGraphs(data, context, extras) {
+    const params = await getComputationDataParams(data, context);
+    return Promise.resolve(this.compute(params, extras)).catch(lanternErrorAdapter);
+  }
+  /**
+   * @param {LH.Artifacts.MetricComputationDataInput} data
+   * @param {LH.Artifacts.ComputedContext} context
+   * @return {Promise<LH.Artifacts.LanternMetric>}
+   */
+  static async compute_(data, context) {
+    const speedline = await SpeedlineComputed.request(data.trace, context);
+    const fcpResult = await LanternFirstContentfulPaintComputed.request(data, context);
+    return this.computeMetricWithGraphs(data, context, {
+      observedSpeedIndex: speedline.speedIndex,
+      fcpResult
+    });
+  }
+};
+var LanternSpeedIndexComputed = makeComputedArtifact(
+  LanternSpeedIndex,
+  ["devtoolsLog", "gatherContext", "settings", "simulator", "trace", "URL", "SourceMaps"]
+);
+
+// node_modules/lighthouse/core/computed/metrics/speed-index.js
+var SpeedIndex = class extends NavigationMetric {
+  /**
+   * @param {LH.Artifacts.NavigationMetricComputationData} data
+   * @param {LH.Artifacts.ComputedContext} context
+   * @return {Promise<LH.Artifacts.LanternMetric>}
+   */
+  static computeSimulatedMetric(data, context) {
+    const metricData = NavigationMetric.getMetricComputationInput(data);
+    return LanternSpeedIndexComputed.request(metricData, context);
+  }
+  /**
+   * @param {LH.Artifacts.NavigationMetricComputationData} data
+   * @param {LH.Artifacts.ComputedContext} context
+   * @return {Promise<LH.Artifacts.Metric>}
+   */
+  static async computeObservedMetric(data, context) {
+    const speedline = await SpeedlineComputed.request(data.trace, context);
+    const timing = Math.round(speedline.speedIndex);
+    const timestamp = (timing + speedline.beginning) * 1e3;
+    return Promise.resolve({ timing, timestamp });
+  }
+};
+var SpeedIndexComputed = makeComputedArtifact(
+  SpeedIndex,
+  ["devtoolsLog", "gatherContext", "settings", "simulator", "trace", "URL", "SourceMaps"]
+);
+
+export {
+  LanternSpeedIndexComputed,
+  SpeedIndexComputed
+};
+/*! Bundled license information:
+
+lighthouse/core/computed/metrics/lantern-speed-index.js:
+lighthouse/core/computed/metrics/speed-index.js:
+  (**
+   * @license
+   * Copyright 2018 Google LLC
+   * SPDX-License-Identifier: Apache-2.0
+   *)
+*/
