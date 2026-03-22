@@ -183,5 +183,27 @@ await build({
 import { unlinkSync } from 'fs'
 try { unlinkSync(shimPath) } catch {}
 
+// Build individual gatherer bundles at dist/gather/gatherers/
+// Lighthouse does dynamic import() with computed paths at runtime:
+//   import.meta.url = dist/action/index.mjs → ../gather/gatherers/foo.js
+//   resolves to dist/gather/gatherers/foo.js — these files must exist on disk.
+console.log('Bundling gatherers...')
+const gathererSrcDir = join(lhDir, 'core', 'gather', 'gatherers')
+const gathererEntries = readdirSync(gathererSrcDir, { withFileTypes: true })
+  .filter(e => !e.isDirectory() && extname(e.name) === '.js')
+  .map(e => join(gathererSrcDir, e.name))
+mkdirSync(join(root, 'dist', 'gather', 'gatherers'), { recursive: true })
+await build({
+  entryPoints: gathererEntries,
+  bundle: true,
+  platform: 'node',
+  target: 'node20',
+  format: 'esm',
+  keepNames: true,
+  outdir: join(root, 'dist', 'gather', 'gatherers'),
+  logLevel: 'warning',
+})
+console.log(`  → ${gathererEntries.length} gatherers bundled`)
+
 copyFileSync(join(root, 'src', 'dashboard', 'index.html'), join(root, 'dist', 'action', 'dashboard.html'))
 console.log('Build complete → dist/action/index.mjs')
