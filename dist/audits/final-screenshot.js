@@ -1,26 +1,31 @@
 import{createRequire as __cjsReq}from'module';const require=__cjsReq(import.meta.url);
 import {
   ProcessedTraceComputed
-} from "./chunk-FTKGXG7F.js";
-import "./chunk-3WVTZQMF.js";
+} from "./chunk-XFJEV2GR.js";
+import "./chunk-NUK2ASLP.js";
 import {
   LighthouseError
-} from "./chunk-2BIJ7VKV.js";
+} from "./chunk-EBBYNBKM.js";
 import {
   makeComputedArtifact
-} from "./chunk-MLADMIB3.js";
-import "./chunk-T3HXWQEB.js";
-import "./chunk-B4FIMLMR.js";
-import "./chunk-NDN2O67Z.js";
-import "./chunk-V6LRM2MD.js";
+} from "./chunk-VW72MYVI.js";
+import "./chunk-O3YNDXOX.js";
+import "./chunk-FOYXSDFQ.js";
+import "./chunk-DQQIQ7YS.js";
+import "./chunk-C5HPB2FB.js";
 import {
   Audit
-} from "./chunk-55A4MDN3.js";
-import "./chunk-23MNVS5G.js";
+} from "./chunk-ZGW6XDCS.js";
+import {
+  __name
+} from "./chunk-XE6XARIN.js";
 
 // node_modules/lighthouse/core/computed/screenshots.js
 var SCREENSHOT_TRACE_NAME = "Screenshot";
 var Screenshots = class {
+  static {
+    __name(this, "Screenshots");
+  }
   /**
    * @param {LH.Trace} trace
    * @return {Promise<Array<{timestamp: number, datauri: string}>>}
@@ -38,6 +43,9 @@ var ScreenshotsComputed = makeComputedArtifact(Screenshots, null);
 
 // node_modules/lighthouse/core/audits/final-screenshot.js
 var FinalScreenshot = class extends Audit {
+  static {
+    __name(this, "FinalScreenshot");
+  }
   /**
    * @return {LH.Audit.Meta}
    */

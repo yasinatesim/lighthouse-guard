@@ -158,18 +158,15 @@ await build({
   platform: 'node',
   target: 'node20',
   format: 'esm',
-  // keepNames: true is intentionally omitted — it injects __name() calls inside
-  // serialized functions that lighthouse injects into Chrome, causing browser errors.
-  // Instead we provide a no-op __name in the banner so lighthouse's detection works.
+  keepNames: true,  // required: lighthouse's createEsbuildFunctionWrapper detects __name pattern
   outfile: join(root, 'dist', 'action', 'index.mjs'),
   plugins: [fsShimPlugin],
   banner: {
     js: [
+      // Force isBundledEnvironment()=true so lighthouse always injects __name into browser evals
+      `globalThis.isDevtools=true;`,
       `import{createRequire as __cjsReq}from'module';`,
       `const __realReq=__cjsReq(import.meta.url);`,
-      // no-op __name: satisfies lighthouse's createEsbuildFunctionWrapper detection
-      // without generating __name() calls inside browser-injected function bodies
-      `var __name=(target,value)=>target;`,
       `const __lhA=${JSON.stringify(assets)};`,
       `const __lhAK=Object.keys(__lhA);`,
       // Build virtual directory index for readdirSync
@@ -213,6 +210,7 @@ await build({
   platform: 'node',
   target: 'node20',
   format: 'esm',
+  keepNames: true,
   outbase: gathererSrcDir,
   outdir: join(root, 'dist', 'gather', 'gatherers'),
   plugins: [fsShimPlugin],  // redirects import 'fs' to shim with embedded assets
@@ -248,6 +246,7 @@ await build({
   platform: 'node',
   target: 'node20',
   format: 'esm',
+  keepNames: true,
   outbase: auditSrcDir,
   outdir: join(root, 'dist', 'audits'),
   plugins: [fsShimPlugin],

@@ -1,5 +1,7 @@
 import{createRequire as __cjsReq}from'module';const require=__cjsReq(import.meta.url);
-import "./chunk-23MNVS5G.js";
+import {
+  __name
+} from "./chunk-XE6XARIN.js";
 
 // node_modules/lighthouse/core/audits/oopif-iframe-test-audit.js
 var oopif_iframe_test_audit_default = {
@@ -10,7 +12,7 @@ var oopif_iframe_test_audit_default = {
     description: "Audit to force the inclusion of IFrameElements artifact",
     requiredArtifacts: ["IFrameElements"]
   },
-  audit: () => ({ score: 1 })
+  audit: /* @__PURE__ */ __name(() => ({ score: 1 }), "audit")
 };
 export {
   oopif_iframe_test_audit_default as default

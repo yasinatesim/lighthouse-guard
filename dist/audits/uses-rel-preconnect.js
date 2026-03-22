@@ -1,48 +1,50 @@
 import{createRequire as __cjsReq}from'module';const require=__cjsReq(import.meta.url);
 import {
   MainResourceComputed
-} from "./chunk-7IFF6OOL.js";
+} from "./chunk-HZ5CS3EU.js";
 import {
   LanternLargestContentfulPaintComputed
-} from "./chunk-4PONSSZA.js";
+} from "./chunk-KWLN6AZG.js";
 import {
   LanternFirstContentfulPaintComputed
-} from "./chunk-YN3ARENP.js";
+} from "./chunk-GPJRF3VM.js";
 import {
   ProcessedNavigationComputed
-} from "./chunk-IOK3BAH7.js";
+} from "./chunk-GOQIOX72.js";
 import {
   PageDependencyGraphComputed
-} from "./chunk-ZIUDIWBD.js";
-import "./chunk-Z7S4UQSE.js";
-import "./chunk-22N3WN7S.js";
+} from "./chunk-GPGXHKXU.js";
+import "./chunk-TYEYL6JI.js";
+import "./chunk-CVEB2JTF.js";
 import {
   LoadSimulatorComputed
-} from "./chunk-GRLAFLTF.js";
-import "./chunk-2FKQ374S.js";
-import "./chunk-ZATS4KUU.js";
-import "./chunk-FTKGXG7F.js";
-import "./chunk-3WVTZQMF.js";
-import "./chunk-3KEMYTTF.js";
+} from "./chunk-E5UDU7XN.js";
+import "./chunk-2RUE6MFF.js";
+import "./chunk-4WOLRYCI.js";
+import "./chunk-XFJEV2GR.js";
+import "./chunk-NUK2ASLP.js";
+import "./chunk-I4AAD5AR.js";
 import {
   NetworkRecordsComputed
-} from "./chunk-JDNHHZFJ.js";
+} from "./chunk-YOYAIZOW.js";
 import {
   url_utils_default
-} from "./chunk-YNYBF6HU.js";
-import "./chunk-2BIJ7VKV.js";
-import "./chunk-MLADMIB3.js";
+} from "./chunk-OZ2G5ZKT.js";
+import "./chunk-EBBYNBKM.js";
+import "./chunk-VW72MYVI.js";
 import {
   UIStrings,
   createIcuMessageFn
-} from "./chunk-T3HXWQEB.js";
-import "./chunk-B4FIMLMR.js";
-import "./chunk-NDN2O67Z.js";
-import "./chunk-V6LRM2MD.js";
+} from "./chunk-O3YNDXOX.js";
+import "./chunk-FOYXSDFQ.js";
+import "./chunk-DQQIQ7YS.js";
+import "./chunk-C5HPB2FB.js";
 import {
   Audit
-} from "./chunk-55A4MDN3.js";
-import "./chunk-23MNVS5G.js";
+} from "./chunk-ZGW6XDCS.js";
+import {
+  __name
+} from "./chunk-XE6XARIN.js";
 
 // node_modules/lighthouse/core/audits/uses-rel-preconnect.js
 var PRECONNECT_SOCKET_MAX_IDLE_IN_MS = 15e3;
@@ -67,6 +69,9 @@ var UIStrings2 = {
 };
 var str_ = createIcuMessageFn(import.meta.url, UIStrings2);
 var UsesRelPreconnectAudit = class _UsesRelPreconnectAudit extends Audit {
+  static {
+    __name(this, "UsesRelPreconnectAudit");
+  }
   /**
    * @return {LH.Audit.Meta}
    */

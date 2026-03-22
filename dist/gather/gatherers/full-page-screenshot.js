@@ -1,20 +1,22 @@
 import{createRequire as __cjsReq}from'module';const require=__cjsReq(import.meta.url);
 import {
   waitForNetworkIdle
-} from "./chunk-R2GMP2EX.js";
-import "./chunk-S3D7FHRV.js";
-import "./chunk-BSOGFMIV.js";
-import "./chunk-B4FIMLMR.js";
-import "./chunk-V6LRM2MD.js";
-import "./chunk-NDN2O67Z.js";
+} from "./chunk-YFDNZNKC.js";
+import "./chunk-FP565QWJ.js";
+import "./chunk-HXOADL7R.js";
+import "./chunk-FOYXSDFQ.js";
+import "./chunk-C5HPB2FB.js";
+import "./chunk-DQQIQ7YS.js";
 import {
   pageFunctions
-} from "./chunk-72S37XJF.js";
-import "./chunk-XKFKI4NM.js";
+} from "./chunk-RDNFCTTE.js";
+import "./chunk-SLD7CHCU.js";
 import {
   base_gatherer_default
-} from "./chunk-CWN23GK2.js";
-import "./chunk-23MNVS5G.js";
+} from "./chunk-3PE3GB6I.js";
+import {
+  __name
+} from "./chunk-XE6XARIN.js";
 
 // node_modules/lighthouse/core/lib/emulation.js
 function parseUseragentIntoMetadata(userAgent, formFactor) {
@@ -48,6 +50,7 @@ function parseUseragentIntoMetadata(userAgent, formFactor) {
     mobile
   };
 }
+__name(parseUseragentIntoMetadata, "parseUseragentIntoMetadata");
 async function emulate(session, settings) {
   if (settings.emulatedUserAgent !== false) {
     const userAgent = (
@@ -68,6 +71,7 @@ async function emulate(session, settings) {
     });
   }
 }
+__name(emulate, "emulate");
 
 // node_modules/lighthouse/core/gather/gatherers/full-page-screenshot.js
 var FULL_PAGE_SCREENSHOT_QUALITY = process.env.LH_FPS_TEST ? 100 : 30;
@@ -79,6 +83,7 @@ function kebabCaseToCamelCase(str) {
     str.replace(/(-\w)/g, (m) => m[1].toUpperCase())
   );
 }
+__name(kebabCaseToCamelCase, "kebabCaseToCamelCase");
 function getObservedDeviceMetrics() {
   const screenOrientationType = kebabCaseToCamelCase(window.screen.orientation.type);
   return {
@@ -91,12 +96,17 @@ function getObservedDeviceMetrics() {
     deviceScaleFactor: window.devicePixelRatio
   };
 }
+__name(getObservedDeviceMetrics, "getObservedDeviceMetrics");
 function waitForDoubleRaf() {
   return new Promise((resolve) => {
     requestAnimationFrame(() => requestAnimationFrame(resolve));
   });
 }
+__name(waitForDoubleRaf, "waitForDoubleRaf");
 var FullPageScreenshot = class extends base_gatherer_default {
+  static {
+    __name(this, "FullPageScreenshot");
+  }
   /** @type {LH.Gatherer.GathererMeta} */
   meta = {
     supportedModes: ["snapshot", "timespan", "navigation"]
@@ -112,7 +122,7 @@ var FullPageScreenshot = class extends base_gatherer_default {
       networkQuietThresholdMs: 1e3,
       busyEvent: "network-critical-busy",
       idleEvent: "network-critical-idle",
-      isIdle: (recorder) => recorder.isCriticalIdle()
+      isIdle: /* @__PURE__ */ __name((recorder) => recorder.isCriticalIdle(), "isIdle")
     });
   }
   /**
@@ -181,6 +191,7 @@ var FullPageScreenshot = class extends base_gatherer_default {
       }
       return nodes;
     }
+    __name(resolveNodes, "resolveNodes");
     function resolveNodesInPage({ useIsolation }) {
       return context.driver.executionContext.evaluate(resolveNodes, {
         args: [],
@@ -188,6 +199,7 @@ var FullPageScreenshot = class extends base_gatherer_default {
         deps: [pageFunctions.getBoundingClientRect]
       });
     }
+    __name(resolveNodesInPage, "resolveNodesInPage");
     const pageContextResult = await resolveNodesInPage({ useIsolation: false });
     const isolatedContextResult = await resolveNodesInPage({ useIsolation: true });
     return { ...pageContextResult, ...isolatedContextResult };

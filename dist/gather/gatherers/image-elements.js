@@ -1,19 +1,21 @@
 import{createRequire as __cjsReq}from'module';const require=__cjsReq(import.meta.url);
 import {
   findMostSpecificMatchedCSSRule
-} from "./chunk-7WEGYAXL.js";
+} from "./chunk-5E7JPS6Z.js";
 import {
   lighthouse_logger_default
-} from "./chunk-B4FIMLMR.js";
-import "./chunk-V6LRM2MD.js";
+} from "./chunk-FOYXSDFQ.js";
+import "./chunk-C5HPB2FB.js";
 import {
   pageFunctions
-} from "./chunk-72S37XJF.js";
-import "./chunk-XKFKI4NM.js";
+} from "./chunk-RDNFCTTE.js";
+import "./chunk-SLD7CHCU.js";
 import {
   base_gatherer_default
-} from "./chunk-CWN23GK2.js";
-import "./chunk-23MNVS5G.js";
+} from "./chunk-3PE3GB6I.js";
+import {
+  __name
+} from "./chunk-XE6XARIN.js";
 
 // node_modules/lighthouse/core/gather/gatherers/image-elements.js
 function getClientRect(element) {
@@ -26,6 +28,7 @@ function getClientRect(element) {
     right: clientRect.right
   };
 }
+__name(getClientRect, "getClientRect");
 function getPosition(element, computedStyle) {
   if (element.parentElement && element.parentElement.tagName === "PICTURE") {
     const parentStyle = window.getComputedStyle(element.parentElement);
@@ -33,6 +36,7 @@ function getPosition(element, computedStyle) {
   }
   return computedStyle.getPropertyValue("position");
 }
+__name(getPosition, "getPosition");
 function getHTMLImages(allElements) {
   const allImageElements = (
     /** @type {Array<HTMLImageElement>} */
@@ -72,6 +76,7 @@ function getHTMLImages(allElements) {
     };
   });
 }
+__name(getHTMLImages, "getHTMLImages");
 function getCSSImages(allElements) {
   const CSS_URL_REGEX = /^url\("([^"]+)"\)$/;
   const images = [];
@@ -104,10 +109,12 @@ function getCSSImages(allElements) {
   }
   return images;
 }
+__name(getCSSImages, "getCSSImages");
 function collectImageElementInfo() {
   const allElements = getElementsInDocument();
   return getHTMLImages(allElements).concat(getCSSImages(allElements));
 }
+__name(collectImageElementInfo, "collectImageElementInfo");
 function determineNaturalSize(url) {
   return new Promise((resolve, reject) => {
     const img = new Image();
@@ -121,18 +128,21 @@ function determineNaturalSize(url) {
     img.src = url;
   });
 }
+__name(determineNaturalSize, "determineNaturalSize");
 function findSizeDeclaration(rule, property) {
   if (!rule || !rule.cssProperties) return;
   const definedProp = rule.cssProperties.find(({ name }) => name === property);
   if (!definedProp) return;
   return definedProp.value;
 }
+__name(findSizeDeclaration, "findSizeDeclaration");
 function findMostSpecificCSSRule(matchedCSSRules, property) {
-  const isDeclarationofInterest = (declaration) => findSizeDeclaration(declaration, property);
+  const isDeclarationofInterest = /* @__PURE__ */ __name((declaration) => findSizeDeclaration(declaration, property), "isDeclarationofInterest");
   const rule = findMostSpecificMatchedCSSRule(matchedCSSRules, isDeclarationofInterest);
   if (!rule) return;
   return findSizeDeclaration(rule, property);
 }
+__name(findMostSpecificCSSRule, "findMostSpecificCSSRule");
 function getEffectiveSizingRule({ attributesStyle, inlineStyle, matchedCSSRules }, property) {
   const inlineRule = findSizeDeclaration(inlineStyle, property);
   if (inlineRule) return inlineRule;
@@ -142,13 +152,18 @@ function getEffectiveSizingRule({ attributesStyle, inlineStyle, matchedCSSRules 
   if (matchedRule) return matchedRule;
   return null;
 }
+__name(getEffectiveSizingRule, "getEffectiveSizingRule");
 function getPixelArea(element) {
   if (element.naturalDimensions) {
     return element.naturalDimensions.height * element.naturalDimensions.width;
   }
   return element.displayedHeight * element.displayedWidth;
 }
+__name(getPixelArea, "getPixelArea");
 var ImageElements = class extends base_gatherer_default {
+  static {
+    __name(this, "ImageElements");
+  }
   /** @type {LH.Gatherer.GathererMeta} */
   meta = {
     supportedModes: ["snapshot", "timespan", "navigation"]

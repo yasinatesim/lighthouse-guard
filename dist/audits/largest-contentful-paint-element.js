@@ -1,47 +1,49 @@
 import{createRequire as __cjsReq}from'module';const require=__cjsReq(import.meta.url);
 import {
   largest_contentful_paint_default
-} from "./chunk-QTCXVSI7.js";
+} from "./chunk-5X3F422L.js";
 import {
   LCPBreakdownComputed
-} from "./chunk-7UA6YY22.js";
+} from "./chunk-FBGCU7L2.js";
 import {
   LargestContentfulPaintComputed
-} from "./chunk-GJZGFHWB.js";
-import "./chunk-7IFF6OOL.js";
-import "./chunk-DGRQI5GC.js";
-import "./chunk-TMQPGYS4.js";
-import "./chunk-4PONSSZA.js";
-import "./chunk-YN3ARENP.js";
-import "./chunk-IOK3BAH7.js";
-import "./chunk-ZIUDIWBD.js";
-import "./chunk-Z7S4UQSE.js";
-import "./chunk-22N3WN7S.js";
+} from "./chunk-FS25QDSJ.js";
+import "./chunk-HZ5CS3EU.js";
+import "./chunk-OMH7NEK4.js";
+import "./chunk-4MRT5KFH.js";
+import "./chunk-KWLN6AZG.js";
+import "./chunk-GPJRF3VM.js";
+import "./chunk-GOQIOX72.js";
+import "./chunk-GPGXHKXU.js";
+import "./chunk-TYEYL6JI.js";
+import "./chunk-CVEB2JTF.js";
 import {
   Sentry
-} from "./chunk-GRLAFLTF.js";
-import "./chunk-2FKQ374S.js";
-import "./chunk-ZATS4KUU.js";
-import "./chunk-FTKGXG7F.js";
-import "./chunk-3WVTZQMF.js";
-import "./chunk-3KEMYTTF.js";
-import "./chunk-JDNHHZFJ.js";
-import "./chunk-YNYBF6HU.js";
-import "./chunk-2BIJ7VKV.js";
-import "./chunk-MLADMIB3.js";
+} from "./chunk-E5UDU7XN.js";
+import "./chunk-2RUE6MFF.js";
+import "./chunk-4WOLRYCI.js";
+import "./chunk-XFJEV2GR.js";
+import "./chunk-NUK2ASLP.js";
+import "./chunk-I4AAD5AR.js";
+import "./chunk-YOYAIZOW.js";
+import "./chunk-OZ2G5ZKT.js";
+import "./chunk-EBBYNBKM.js";
+import "./chunk-VW72MYVI.js";
 import {
   UIStrings,
   createIcuMessageFn
-} from "./chunk-T3HXWQEB.js";
+} from "./chunk-O3YNDXOX.js";
 import {
   lighthouse_logger_default
-} from "./chunk-B4FIMLMR.js";
-import "./chunk-NDN2O67Z.js";
-import "./chunk-V6LRM2MD.js";
+} from "./chunk-FOYXSDFQ.js";
+import "./chunk-DQQIQ7YS.js";
+import "./chunk-C5HPB2FB.js";
 import {
   Audit
-} from "./chunk-55A4MDN3.js";
-import "./chunk-23MNVS5G.js";
+} from "./chunk-ZGW6XDCS.js";
+import {
+  __name
+} from "./chunk-XE6XARIN.js";
 
 // node_modules/lighthouse/core/audits/largest-contentful-paint-element.js
 var UIStrings2 = {
@@ -66,6 +68,9 @@ var UIStrings2 = {
 };
 var str_ = createIcuMessageFn(import.meta.url, UIStrings2);
 var LargestContentfulPaintElement = class extends Audit {
+  static {
+    __name(this, "LargestContentfulPaintElement");
+  }
   /**
    * @return {LH.Audit.Meta}
    */

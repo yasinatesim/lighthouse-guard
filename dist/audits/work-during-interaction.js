@@ -1,39 +1,41 @@
 import{createRequire as __cjsReq}from'module';const require=__cjsReq(import.meta.url);
 import {
   interaction_to_next_paint_default
-} from "./chunk-Q6HJU6MV.js";
+} from "./chunk-37EJL7D6.js";
 import {
   ResponsivenessComputed
-} from "./chunk-36H7DF6Q.js";
+} from "./chunk-4IPLRRAD.js";
 import {
   getExecutionTimingsByURL
-} from "./chunk-KRP3ZBL5.js";
+} from "./chunk-32EFSKRS.js";
 import {
   MainThreadTasks,
   taskGroups
-} from "./chunk-QBXT32HH.js";
+} from "./chunk-UE3SWGEC.js";
 import {
   ProcessedTraceComputed
-} from "./chunk-FTKGXG7F.js";
+} from "./chunk-XFJEV2GR.js";
 import {
   TraceProcessor
-} from "./chunk-3WVTZQMF.js";
+} from "./chunk-NUK2ASLP.js";
 import {
   NetworkRecordsComputed
-} from "./chunk-JDNHHZFJ.js";
-import "./chunk-YNYBF6HU.js";
-import "./chunk-2BIJ7VKV.js";
-import "./chunk-MLADMIB3.js";
+} from "./chunk-YOYAIZOW.js";
+import "./chunk-OZ2G5ZKT.js";
+import "./chunk-EBBYNBKM.js";
+import "./chunk-VW72MYVI.js";
 import {
   createIcuMessageFn
-} from "./chunk-T3HXWQEB.js";
-import "./chunk-B4FIMLMR.js";
-import "./chunk-NDN2O67Z.js";
-import "./chunk-V6LRM2MD.js";
+} from "./chunk-O3YNDXOX.js";
+import "./chunk-FOYXSDFQ.js";
+import "./chunk-DQQIQ7YS.js";
+import "./chunk-C5HPB2FB.js";
 import {
   Audit
-} from "./chunk-55A4MDN3.js";
-import "./chunk-23MNVS5G.js";
+} from "./chunk-ZGW6XDCS.js";
+import {
+  __name
+} from "./chunk-XE6XARIN.js";
 
 // node_modules/lighthouse/core/audits/work-during-interaction.js
 var TASK_THRESHOLD = 1;
@@ -60,6 +62,9 @@ var UIStrings = {
 };
 var str_ = createIcuMessageFn(import.meta.url, UIStrings);
 var WorkDuringInteraction = class _WorkDuringInteraction extends Audit {
+  static {
+    __name(this, "WorkDuringInteraction");
+  }
   /**
    * @return {LH.Audit.Meta}
    */

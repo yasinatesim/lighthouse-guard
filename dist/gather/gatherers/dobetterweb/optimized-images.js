@@ -1,27 +1,29 @@
 import{createRequire as __cjsReq}from'module';const require=__cjsReq(import.meta.url);
 import {
   Sentry
-} from "../chunk-ACZALYVN.js";
-import "../chunk-3WVTZQMF.js";
+} from "../chunk-4LDDF7I7.js";
+import "../chunk-NUK2ASLP.js";
 import {
   NetworkRecordsComputed,
   NetworkRequest,
   url_utils_default
-} from "../chunk-ELEI4PD3.js";
-import "../chunk-BSOGFMIV.js";
+} from "../chunk-QE4YYANC.js";
+import "../chunk-HXOADL7R.js";
 import {
   lighthouse_logger_default
-} from "../chunk-B4FIMLMR.js";
-import "../chunk-V6LRM2MD.js";
-import "../chunk-NDN2O67Z.js";
-import "../chunk-XKFKI4NM.js";
+} from "../chunk-FOYXSDFQ.js";
+import "../chunk-C5HPB2FB.js";
+import "../chunk-DQQIQ7YS.js";
+import "../chunk-SLD7CHCU.js";
 import {
   devtools_log_default
-} from "../chunk-BINTPAJN.js";
+} from "../chunk-NSCX6JDY.js";
 import {
   base_gatherer_default
-} from "../chunk-CWN23GK2.js";
-import "../chunk-23MNVS5G.js";
+} from "../chunk-3PE3GB6I.js";
+import {
+  __name
+} from "../chunk-XE6XARIN.js";
 
 // node_modules/lighthouse/core/gather/gatherers/dobetterweb/optimized-images.js
 var MAX_TIME_TO_SPEND_ENCODING = 5e3;
@@ -31,6 +33,9 @@ var WEBP_QUALITY = 0.85;
 var MINIMUM_IMAGE_SIZE = 4096;
 var IMAGE_REGEX = /^image\/((x|ms|x-ms)-)?(png|bmp|jpeg)$/;
 var OptimizedImages = class _OptimizedImages extends base_gatherer_default {
+  static {
+    __name(this, "OptimizedImages");
+  }
   /** @type {LH.Gatherer.GathererMeta<'DevtoolsLog'>} */
   meta = {
     supportedModes: ["timespan", "navigation"],

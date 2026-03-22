@@ -1,24 +1,25 @@
 import{createRequire as __cjsReq}from'module';const require=__cjsReq(import.meta.url);
 import {
   MainResourceComputed
-} from "../chunk-7IFF6OOL.js";
-import "../chunk-JDNHHZFJ.js";
-import "../chunk-YNYBF6HU.js";
-import "../chunk-2BIJ7VKV.js";
-import "../chunk-MLADMIB3.js";
+} from "../chunk-HZ5CS3EU.js";
+import "../chunk-YOYAIZOW.js";
+import "../chunk-OZ2G5ZKT.js";
+import "../chunk-EBBYNBKM.js";
+import "../chunk-VW72MYVI.js";
 import {
   createIcuMessageFn
-} from "../chunk-T3HXWQEB.js";
-import "../chunk-B4FIMLMR.js";
-import "../chunk-NDN2O67Z.js";
-import "../chunk-V6LRM2MD.js";
+} from "../chunk-O3YNDXOX.js";
+import "../chunk-FOYXSDFQ.js";
+import "../chunk-DQQIQ7YS.js";
+import "../chunk-C5HPB2FB.js";
 import {
   Audit
-} from "../chunk-55A4MDN3.js";
+} from "../chunk-ZGW6XDCS.js";
 import {
   __commonJS,
+  __name,
   __toESM
-} from "../chunk-23MNVS5G.js";
+} from "../chunk-XE6XARIN.js";
 
 // node_modules/robots-parser/Robots.js
 var require_Robots = __commonJS({
@@ -32,6 +33,7 @@ var require_Robots = __commonJS({
       }
       return String(line).trim();
     }
+    __name(trimLine, "trimLine");
     function removeComments(line) {
       var commentStartIndex = line.indexOf("#");
       if (commentStartIndex > -1) {
@@ -39,6 +41,7 @@ var require_Robots = __commonJS({
       }
       return line;
     }
+    __name(removeComments, "removeComments");
     function splitLine(line) {
       var idx = String(line).indexOf(":");
       if (!line || idx < 0) {
@@ -46,6 +49,7 @@ var require_Robots = __commonJS({
       }
       return [line.slice(0, idx), line.slice(idx + 1)];
     }
+    __name(splitLine, "splitLine");
     function formatUserAgent(userAgent) {
       var formattedUserAgent = userAgent.toLowerCase();
       var idx = formattedUserAgent.indexOf("/");
@@ -54,6 +58,7 @@ var require_Robots = __commonJS({
       }
       return formattedUserAgent.trim();
     }
+    __name(formatUserAgent, "formatUserAgent");
     function normaliseEncoding(path) {
       try {
         return urlEncodeToUpper(encodeURI(path).replace(/%25/g, "%"));
@@ -61,11 +66,13 @@ var require_Robots = __commonJS({
         return path;
       }
     }
+    __name(normaliseEncoding, "normaliseEncoding");
     function urlEncodeToUpper(path) {
       return path.replace(/%[0-9a-fA-F]{2}/g, function(match) {
         return match.toUpperCase();
       });
     }
+    __name(urlEncodeToUpper, "urlEncodeToUpper");
     function matches(pattern, path) {
       var matchingLengths = new Array(path.length + 1);
       var numMatchingLengths = 1;
@@ -94,6 +101,7 @@ var require_Robots = __commonJS({
       }
       return true;
     }
+    __name(matches, "matches");
     function parseRobots(contents, robots) {
       var newlineRegex = /\r\n|\r|\n/;
       var lines = contents.split(newlineRegex).map(removeComments).map(splitLine).map(trimLine);
@@ -136,6 +144,7 @@ var require_Robots = __commonJS({
         isNoneUserAgentState = line[0].toLowerCase() !== "user-agent";
       }
     }
+    __name(parseRobots, "parseRobots");
     function findRule(path, rules) {
       var matchedRule = null;
       for (var i = 0; i < rules.length; i++) {
@@ -151,6 +160,7 @@ var require_Robots = __commonJS({
       }
       return matchedRule;
     }
+    __name(findRule, "findRule");
     function parseUrl(url) {
       try {
         var url = new URL(url, "http://robots-relative.samclarke.com/");
@@ -162,6 +172,7 @@ var require_Robots = __commonJS({
         return null;
       }
     }
+    __name(parseUrl, "parseUrl");
     function Robots(url, contents) {
       this._url = parseUrl(url) || {};
       this._rules = /* @__PURE__ */ Object.create(null);
@@ -169,6 +180,7 @@ var require_Robots = __commonJS({
       this._preferredHost = null;
       parseRobots(contents || "", this);
     }
+    __name(Robots, "Robots");
     Robots.prototype.addRule = function(userAgents, pattern, allow, lineNumber) {
       var rules = this._rules;
       userAgents.forEach(function(userAgent) {
@@ -281,16 +293,22 @@ function isUnavailable(directive) {
   const date = Date.parse(parts.slice(1).join(":"));
   return !isNaN(date) && date < Date.now();
 }
+__name(isUnavailable, "isUnavailable");
 function hasBlockingDirective(directives) {
   return directives.split(",").map((d) => d.toLowerCase().trim()).some((d) => BLOCKLIST.has(d) || isUnavailable(d));
 }
+__name(hasBlockingDirective, "hasBlockingDirective");
 function getUserAgentFromHeaderDirectives(directives) {
   const parts = directives.match(/^([^,:]+):/);
   if (!!parts && parts[1].toLowerCase() !== UNAVAILABLE_AFTER) {
     return parts[1];
   }
 }
+__name(getUserAgentFromHeaderDirectives, "getUserAgentFromHeaderDirectives");
 var IsCrawlable = class _IsCrawlable extends Audit {
+  static {
+    __name(this, "IsCrawlable");
+  }
   /**
    * @return {LH.Audit.Meta}
    */

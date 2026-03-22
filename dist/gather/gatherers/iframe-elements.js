@@ -1,12 +1,14 @@
 import{createRequire as __cjsReq}from'module';const require=__cjsReq(import.meta.url);
 import {
   pageFunctions
-} from "./chunk-72S37XJF.js";
-import "./chunk-XKFKI4NM.js";
+} from "./chunk-RDNFCTTE.js";
+import "./chunk-SLD7CHCU.js";
 import {
   base_gatherer_default
-} from "./chunk-CWN23GK2.js";
-import "./chunk-23MNVS5G.js";
+} from "./chunk-3PE3GB6I.js";
+import {
+  __name
+} from "./chunk-XE6XARIN.js";
 
 // node_modules/lighthouse/core/gather/gatherers/iframe-elements.js
 function collectIFrameElements() {
@@ -30,7 +32,11 @@ function collectIFrameElements() {
     }
   );
 }
+__name(collectIFrameElements, "collectIFrameElements");
 var IFrameElements = class extends base_gatherer_default {
+  static {
+    __name(this, "IFrameElements");
+  }
   /** @type {LH.Gatherer.GathererMeta} */
   meta = {
     supportedModes: ["snapshot", "navigation"]

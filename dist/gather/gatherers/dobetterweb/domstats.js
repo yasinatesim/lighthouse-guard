@@ -1,12 +1,14 @@
 import{createRequire as __cjsReq}from'module';const require=__cjsReq(import.meta.url);
 import {
   pageFunctions
-} from "../chunk-72S37XJF.js";
-import "../chunk-XKFKI4NM.js";
+} from "../chunk-RDNFCTTE.js";
+import "../chunk-SLD7CHCU.js";
 import {
   base_gatherer_default
-} from "../chunk-CWN23GK2.js";
-import "../chunk-23MNVS5G.js";
+} from "../chunk-3PE3GB6I.js";
+import {
+  __name
+} from "../chunk-XE6XARIN.js";
 
 // node_modules/lighthouse/core/gather/gatherers/dobetterweb/domstats.js
 function getDOMStats(element = document.body, deep = true) {
@@ -15,7 +17,7 @@ function getDOMStats(element = document.body, deep = true) {
   let maxWidth = -1;
   let numElements = 0;
   let parentWithMostChildren = null;
-  const _calcDOMWidthAndHeight = function(element2, depth = 1) {
+  const _calcDOMWidthAndHeight = /* @__PURE__ */ __name(function(element2, depth = 1) {
     if (depth > maxDepth) {
       deepestElement = element2;
       maxDepth = depth;
@@ -34,7 +36,7 @@ function getDOMStats(element = document.body, deep = true) {
       numElements++;
     }
     return { maxDepth, maxWidth, numElements };
-  };
+  }, "_calcDOMWidthAndHeight");
   const result = _calcDOMWidthAndHeight(element);
   return {
     depth: {
@@ -50,7 +52,11 @@ function getDOMStats(element = document.body, deep = true) {
     totalBodyElements: result.numElements
   };
 }
+__name(getDOMStats, "getDOMStats");
 var DOMStats = class extends base_gatherer_default {
+  static {
+    __name(this, "DOMStats");
+  }
   /** @type {LH.Gatherer.GathererMeta} */
   meta = {
     supportedModes: ["snapshot", "navigation"]

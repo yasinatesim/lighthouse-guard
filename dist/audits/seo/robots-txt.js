@@ -1,14 +1,16 @@
 import{createRequire as __cjsReq}from'module';const require=__cjsReq(import.meta.url);
 import {
   createIcuMessageFn
-} from "../chunk-T3HXWQEB.js";
-import "../chunk-B4FIMLMR.js";
-import "../chunk-NDN2O67Z.js";
-import "../chunk-V6LRM2MD.js";
+} from "../chunk-O3YNDXOX.js";
+import "../chunk-FOYXSDFQ.js";
+import "../chunk-DQQIQ7YS.js";
+import "../chunk-C5HPB2FB.js";
 import {
   Audit
-} from "../chunk-55A4MDN3.js";
-import "../chunk-23MNVS5G.js";
+} from "../chunk-ZGW6XDCS.js";
+import {
+  __name
+} from "../chunk-XE6XARIN.js";
 
 // node_modules/lighthouse/core/audits/seo/robots-txt.js
 var HTTP_CLIENT_ERROR_CODE_LOW = 400;
@@ -85,6 +87,7 @@ function verifyDirective(directiveName, directiveValue) {
     }
   }
 }
+__name(verifyDirective, "verifyDirective");
 function parseLine(line) {
   const hashIndex = line.indexOf("#");
   if (hashIndex !== -1) {
@@ -106,6 +109,7 @@ function parseLine(line) {
     value: directiveValue
   };
 }
+__name(parseLine, "parseLine");
 function validateRobots(content) {
   const errors = [];
   let inGroup = false;
@@ -135,7 +139,11 @@ function validateRobots(content) {
   });
   return errors;
 }
+__name(validateRobots, "validateRobots");
 var RobotsTxt = class extends Audit {
+  static {
+    __name(this, "RobotsTxt");
+  }
   /**
    * @return {LH.Audit.Meta}
    */

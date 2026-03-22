@@ -1,29 +1,32 @@
 import{createRequire as __cjsReq}from'module';const require=__cjsReq(import.meta.url);
 import {
   resolveDevtoolsNodePathToObjectId
-} from "./chunk-NG67H7T4.js";
+} from "./chunk-2VOQBKE3.js";
 import {
   pageFunctions
-} from "./chunk-72S37XJF.js";
-import "./chunk-XKFKI4NM.js";
+} from "./chunk-RDNFCTTE.js";
+import "./chunk-SLD7CHCU.js";
 import {
   base_gatherer_default
-} from "./chunk-CWN23GK2.js";
-import "./chunk-23MNVS5G.js";
+} from "./chunk-3PE3GB6I.js";
+import {
+  __name
+} from "./chunk-XE6XARIN.js";
 
 // node_modules/lighthouse/core/gather/gatherers/anchor-elements.js
 function collectAnchorElements() {
-  const resolveURLOrEmpty = (url) => {
+  const resolveURLOrEmpty = /* @__PURE__ */ __name((url) => {
     try {
       return new URL(url, window.location.href).href;
     } catch (_) {
       return "";
     }
-  };
+  }, "resolveURLOrEmpty");
   function getTruncatedOnclick(node) {
     const onclick = node.getAttribute("onclick") || "";
     return onclick.slice(0, 1024);
   }
+  __name(getTruncatedOnclick, "getTruncatedOnclick");
   function getLangOfInnerText(node) {
     let curNodeLang = null;
     for (const child of node.querySelectorAll("*")) {
@@ -40,6 +43,7 @@ function collectAnchorElements() {
     }
     return curNodeLang ?? node.closest("[lang]")?.getAttribute("lang") ?? null;
   }
+  __name(getLangOfInnerText, "getLangOfInnerText");
   const anchorElements = getElementsInDocument("a");
   const langElements = getElementsInDocument("[lang]");
   const documentHasSingleLang = langElements.length === 1 && (langElements[0].nodeName === "BODY" || langElements[0].nodeName === "HTML");
@@ -79,6 +83,7 @@ function collectAnchorElements() {
     };
   });
 }
+__name(collectAnchorElements, "collectAnchorElements");
 async function getEventListeners(session, devtoolsNodePath) {
   const objectId = await resolveDevtoolsNodePathToObjectId(session, devtoolsNodePath);
   if (!objectId) return [];
@@ -87,7 +92,11 @@ async function getEventListeners(session, devtoolsNodePath) {
   });
   return response.listeners.map(({ type }) => ({ type }));
 }
+__name(getEventListeners, "getEventListeners");
 var AnchorElements = class extends base_gatherer_default {
+  static {
+    __name(this, "AnchorElements");
+  }
   /** @type {LH.Gatherer.GathererMeta} */
   meta = {
     supportedModes: ["snapshot", "navigation"]

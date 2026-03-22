@@ -2,22 +2,24 @@ import{createRequire as __cjsReq}from'module';const require=__cjsReq(import.meta
 import {
   NetworkRecordsComputed,
   NetworkRequest
-} from "./chunk-JDNHHZFJ.js";
+} from "./chunk-YOYAIZOW.js";
 import {
   url_utils_default
-} from "./chunk-YNYBF6HU.js";
-import "./chunk-2BIJ7VKV.js";
-import "./chunk-MLADMIB3.js";
+} from "./chunk-OZ2G5ZKT.js";
+import "./chunk-EBBYNBKM.js";
+import "./chunk-VW72MYVI.js";
 import {
   createIcuMessageFn
-} from "./chunk-T3HXWQEB.js";
-import "./chunk-B4FIMLMR.js";
-import "./chunk-NDN2O67Z.js";
-import "./chunk-V6LRM2MD.js";
+} from "./chunk-O3YNDXOX.js";
+import "./chunk-FOYXSDFQ.js";
+import "./chunk-DQQIQ7YS.js";
+import "./chunk-C5HPB2FB.js";
 import {
   Audit
-} from "./chunk-55A4MDN3.js";
-import "./chunk-23MNVS5G.js";
+} from "./chunk-ZGW6XDCS.js";
+import {
+  __name
+} from "./chunk-XE6XARIN.js";
 
 // node_modules/lighthouse/core/audits/is-on-https.js
 var UIStrings = {
@@ -52,6 +54,9 @@ var resolutionToString = {
 };
 var str_ = createIcuMessageFn(import.meta.url, UIStrings);
 var HTTPS = class extends Audit {
+  static {
+    __name(this, "HTTPS");
+  }
   /**
    * @return {LH.Audit.Meta}
    */

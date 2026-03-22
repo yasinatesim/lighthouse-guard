@@ -1,22 +1,24 @@
 import{createRequire as __cjsReq}from'module';const require=__cjsReq(import.meta.url);
 import {
   MainResourceComputed
-} from "./chunk-7IFF6OOL.js";
-import "./chunk-JDNHHZFJ.js";
-import "./chunk-YNYBF6HU.js";
-import "./chunk-2BIJ7VKV.js";
-import "./chunk-MLADMIB3.js";
+} from "./chunk-HZ5CS3EU.js";
+import "./chunk-YOYAIZOW.js";
+import "./chunk-OZ2G5ZKT.js";
+import "./chunk-EBBYNBKM.js";
+import "./chunk-VW72MYVI.js";
 import {
   UIStrings,
   createIcuMessageFn
-} from "./chunk-T3HXWQEB.js";
-import "./chunk-B4FIMLMR.js";
-import "./chunk-NDN2O67Z.js";
-import "./chunk-V6LRM2MD.js";
+} from "./chunk-O3YNDXOX.js";
+import "./chunk-FOYXSDFQ.js";
+import "./chunk-DQQIQ7YS.js";
+import "./chunk-C5HPB2FB.js";
 import {
   Audit
-} from "./chunk-55A4MDN3.js";
-import "./chunk-23MNVS5G.js";
+} from "./chunk-ZGW6XDCS.js";
+import {
+  __name
+} from "./chunk-XE6XARIN.js";
 
 // node_modules/lighthouse/core/audits/server-response-time.js
 var UIStrings2 = {
@@ -33,6 +35,9 @@ var str_ = createIcuMessageFn(import.meta.url, UIStrings2);
 var TOO_SLOW_THRESHOLD_MS = 600;
 var TARGET_MS = 100;
 var ServerResponseTime = class _ServerResponseTime extends Audit {
+  static {
+    __name(this, "ServerResponseTime");
+  }
   /**
    * @return {LH.Audit.Meta}
    */

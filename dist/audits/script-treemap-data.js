@@ -1,35 +1,40 @@
 import{createRequire as __cjsReq}from'module';const require=__cjsReq(import.meta.url);
 import {
   UnusedJavascriptSummaryComputed
-} from "./chunk-UN2LSKXU.js";
+} from "./chunk-UNGGEIT5.js";
 import {
   ModuleDuplicationComputed
-} from "./chunk-IVDAVZ2R.js";
+} from "./chunk-EAF2KUOF.js";
 import {
   JSBundlesComputed
-} from "./chunk-QQ76V5R3.js";
+} from "./chunk-QMRXOAX7.js";
 import {
   getRequestForScript,
   isInline
-} from "./chunk-S2GJPGDO.js";
-import "./chunk-3KEMYTTF.js";
+} from "./chunk-KD3VE2GF.js";
+import "./chunk-I4AAD5AR.js";
 import {
   NetworkRecordsComputed
-} from "./chunk-JDNHHZFJ.js";
-import "./chunk-YNYBF6HU.js";
-import "./chunk-2BIJ7VKV.js";
-import "./chunk-MLADMIB3.js";
-import "./chunk-T3HXWQEB.js";
-import "./chunk-B4FIMLMR.js";
-import "./chunk-NDN2O67Z.js";
-import "./chunk-V6LRM2MD.js";
+} from "./chunk-YOYAIZOW.js";
+import "./chunk-OZ2G5ZKT.js";
+import "./chunk-EBBYNBKM.js";
+import "./chunk-VW72MYVI.js";
+import "./chunk-O3YNDXOX.js";
+import "./chunk-FOYXSDFQ.js";
+import "./chunk-DQQIQ7YS.js";
+import "./chunk-C5HPB2FB.js";
 import {
   Audit
-} from "./chunk-55A4MDN3.js";
-import "./chunk-23MNVS5G.js";
+} from "./chunk-ZGW6XDCS.js";
+import {
+  __name
+} from "./chunk-XE6XARIN.js";
 
 // node_modules/lighthouse/core/audits/script-treemap-data.js
 var ScriptTreemapDataAudit = class _ScriptTreemapDataAudit extends Audit {
+  static {
+    __name(this, "ScriptTreemapDataAudit");
+  }
   /**
    * @return {LH.Audit.Meta}
    */
@@ -60,6 +65,7 @@ var ScriptTreemapDataAudit = class _ScriptTreemapDataAudit extends Audit {
         encodedBytes: void 0
       };
     }
+    __name(newNode, "newNode");
     const sourceRootNode = newNode(sourceRoot);
     function addAllNodesInSourcePath(source, data) {
       let node = sourceRootNode;
@@ -85,6 +91,7 @@ var ScriptTreemapDataAudit = class _ScriptTreemapDataAudit extends Audit {
         }
       });
     }
+    __name(addAllNodesInSourcePath, "addAllNodesInSourcePath");
     for (const [source, data] of Object.entries(sourcesData)) {
       addAllNodesInSourcePath(source, data);
     }
@@ -103,6 +110,7 @@ var ScriptTreemapDataAudit = class _ScriptTreemapDataAudit extends Audit {
         }
       }
     }
+    __name(collapseAll, "collapseAll");
     collapseAll(sourceRootNode);
     if (!sourceRootNode.name) {
       return {

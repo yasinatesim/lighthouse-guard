@@ -1,30 +1,31 @@
 import{createRequire as __cjsReq}from'module';const require=__cjsReq(import.meta.url);
 import {
   MainResourceComputed
-} from "./chunk-OLKTLGDL.js";
-import "./chunk-ELEI4PD3.js";
+} from "./chunk-ZU3XYCLR.js";
+import "./chunk-QE4YYANC.js";
 import {
   createIcuMessageFn
-} from "./chunk-BSOGFMIV.js";
-import "./chunk-B4FIMLMR.js";
-import "./chunk-V6LRM2MD.js";
-import "./chunk-NDN2O67Z.js";
+} from "./chunk-HXOADL7R.js";
+import "./chunk-FOYXSDFQ.js";
+import "./chunk-C5HPB2FB.js";
+import "./chunk-DQQIQ7YS.js";
 import {
   pageFunctions
-} from "./chunk-72S37XJF.js";
+} from "./chunk-RDNFCTTE.js";
 import {
   Util
-} from "./chunk-XKFKI4NM.js";
+} from "./chunk-SLD7CHCU.js";
 import {
   devtools_log_default
-} from "./chunk-BINTPAJN.js";
+} from "./chunk-NSCX6JDY.js";
 import {
   base_gatherer_default
-} from "./chunk-CWN23GK2.js";
+} from "./chunk-3PE3GB6I.js";
 import {
   __commonJS,
+  __name,
   __toESM
-} from "./chunk-23MNVS5G.js";
+} from "./chunk-XE6XARIN.js";
 
 // node_modules/http-link-header/lib/link.js
 var require_link = __commonJS({
@@ -45,24 +46,32 @@ var require_link = __commonJS({
     function trim(value) {
       return value.replace(WS_TRIM_PATTERN, "");
     }
+    __name(trim, "trim");
     function hasWhitespace(value) {
       return WS_CHAR_PATTERN.test(value);
     }
+    __name(hasWhitespace, "hasWhitespace");
     function skipWhitespace(value, offset) {
       while (hasWhitespace(value[offset])) {
         offset++;
       }
       return offset;
     }
+    __name(skipWhitespace, "skipWhitespace");
     function needsQuotes(value) {
       return WS_DELIMITER_PATTERN.test(value) || !TOKEN_PATTERN.test(value);
     }
+    __name(needsQuotes, "needsQuotes");
     function shallowCompareObjects(object1, object2) {
       return Object.keys(object1).length === Object.keys(object2).length && Object.keys(object1).every(
         (key) => key in object2 && object1[key] === object2[key]
       );
     }
+    __name(shallowCompareObjects, "shallowCompareObjects");
     var Link = class _Link {
+      static {
+        __name(this, "Link");
+      }
       /**
        * Link
        * @constructor
@@ -336,11 +345,13 @@ function normalizeUrlOrNull(url, finalDisplayedUrl) {
     return null;
   }
 }
+__name(normalizeUrlOrNull, "normalizeUrlOrNull");
 function getCrossoriginFromHeader(value) {
   if (value === "anonymous") return "anonymous";
   if (value === "use-credentials") return "use-credentials";
   return null;
 }
+__name(getCrossoriginFromHeader, "getCrossoriginFromHeader");
 function getLinkElementsInDOM() {
   const browserElements = getElementsInDocument("link");
   const linkElements = [];
@@ -363,7 +374,11 @@ function getLinkElementsInDOM() {
   }
   return linkElements;
 }
+__name(getLinkElementsInDOM, "getLinkElementsInDOM");
 var LinkElements = class _LinkElements extends base_gatherer_default {
+  static {
+    __name(this, "LinkElements");
+  }
   /** @type {LH.Gatherer.GathererMeta<'DevtoolsLog'>} */
   meta = {
     supportedModes: ["timespan", "navigation"],

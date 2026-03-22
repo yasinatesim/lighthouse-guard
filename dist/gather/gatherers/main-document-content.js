@@ -1,26 +1,31 @@
 import{createRequire as __cjsReq}from'module';const require=__cjsReq(import.meta.url);
 import {
   MainResourceComputed
-} from "./chunk-OLKTLGDL.js";
+} from "./chunk-ZU3XYCLR.js";
 import {
   fetchResponseBodyFromCache
-} from "./chunk-GMKVUW4A.js";
-import "./chunk-ELEI4PD3.js";
-import "./chunk-BSOGFMIV.js";
-import "./chunk-B4FIMLMR.js";
-import "./chunk-V6LRM2MD.js";
-import "./chunk-NDN2O67Z.js";
-import "./chunk-XKFKI4NM.js";
+} from "./chunk-FTGJSZ7L.js";
+import "./chunk-QE4YYANC.js";
+import "./chunk-HXOADL7R.js";
+import "./chunk-FOYXSDFQ.js";
+import "./chunk-C5HPB2FB.js";
+import "./chunk-DQQIQ7YS.js";
+import "./chunk-SLD7CHCU.js";
 import {
   devtools_log_default
-} from "./chunk-BINTPAJN.js";
+} from "./chunk-NSCX6JDY.js";
 import {
   base_gatherer_default
-} from "./chunk-CWN23GK2.js";
-import "./chunk-23MNVS5G.js";
+} from "./chunk-3PE3GB6I.js";
+import {
+  __name
+} from "./chunk-XE6XARIN.js";
 
 // node_modules/lighthouse/core/gather/gatherers/main-document-content.js
 var MainDocumentContent = class extends base_gatherer_default {
+  static {
+    __name(this, "MainDocumentContent");
+  }
   /** @type {LH.Gatherer.GathererMeta<'DevtoolsLog'>} */
   meta = {
     supportedModes: ["navigation"],

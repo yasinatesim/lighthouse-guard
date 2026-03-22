@@ -1,33 +1,38 @@
 import{createRequire as __cjsReq}from'module';const require=__cjsReq(import.meta.url);
 import {
   MainResourceComputed
-} from "./chunk-7IFF6OOL.js";
+} from "./chunk-HZ5CS3EU.js";
 import {
   MainThreadTasksComputed
-} from "./chunk-FXMGSRO7.js";
-import "./chunk-QBXT32HH.js";
+} from "./chunk-AJV4A5MH.js";
+import "./chunk-UE3SWGEC.js";
 import {
   NetworkAnalysisComputed
-} from "./chunk-ZATS4KUU.js";
-import "./chunk-FTKGXG7F.js";
-import "./chunk-3WVTZQMF.js";
+} from "./chunk-4WOLRYCI.js";
+import "./chunk-XFJEV2GR.js";
+import "./chunk-NUK2ASLP.js";
 import {
   NetworkRecordsComputed
-} from "./chunk-JDNHHZFJ.js";
-import "./chunk-YNYBF6HU.js";
-import "./chunk-2BIJ7VKV.js";
-import "./chunk-MLADMIB3.js";
-import "./chunk-T3HXWQEB.js";
-import "./chunk-B4FIMLMR.js";
-import "./chunk-NDN2O67Z.js";
-import "./chunk-V6LRM2MD.js";
+} from "./chunk-YOYAIZOW.js";
+import "./chunk-OZ2G5ZKT.js";
+import "./chunk-EBBYNBKM.js";
+import "./chunk-VW72MYVI.js";
+import "./chunk-O3YNDXOX.js";
+import "./chunk-FOYXSDFQ.js";
+import "./chunk-DQQIQ7YS.js";
+import "./chunk-C5HPB2FB.js";
 import {
   Audit
-} from "./chunk-55A4MDN3.js";
-import "./chunk-23MNVS5G.js";
+} from "./chunk-ZGW6XDCS.js";
+import {
+  __name
+} from "./chunk-XE6XARIN.js";
 
 // node_modules/lighthouse/core/audits/diagnostics.js
 var Diagnostics = class extends Audit {
+  static {
+    __name(this, "Diagnostics");
+  }
   /**
    * @return {LH.Audit.Meta}
    */

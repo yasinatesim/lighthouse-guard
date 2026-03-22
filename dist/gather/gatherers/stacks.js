@@ -1,16 +1,18 @@
 import{createRequire as __cjsReq}from'module';const require=__cjsReq(import.meta.url);
 import {
   lighthouse_logger_default
-} from "./chunk-B4FIMLMR.js";
-import "./chunk-V6LRM2MD.js";
+} from "./chunk-FOYXSDFQ.js";
+import "./chunk-C5HPB2FB.js";
 import {
   init_shim_fs,
   shim_fs_default
-} from "./chunk-NDN2O67Z.js";
+} from "./chunk-DQQIQ7YS.js";
 import {
   base_gatherer_default
-} from "./chunk-CWN23GK2.js";
-import "./chunk-23MNVS5G.js";
+} from "./chunk-3PE3GB6I.js";
+import {
+  __name
+} from "./chunk-XE6XARIN.js";
 
 // node_modules/lighthouse/core/gather/gatherers/stacks.js
 init_shim_fs();
@@ -42,7 +44,11 @@ async function detectLibraries() {
   }
   return libraries;
 }
+__name(detectLibraries, "detectLibraries");
 var Stacks = class _Stacks extends base_gatherer_default {
+  static {
+    __name(this, "Stacks");
+  }
   constructor() {
     super();
     this.meta = {

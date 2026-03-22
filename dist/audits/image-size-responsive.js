@@ -1,26 +1,28 @@
 import{createRequire as __cjsReq}from'module';const require=__cjsReq(import.meta.url);
 import {
   ImageRecordsComputed
-} from "./chunk-6QMGR6RW.js";
+} from "./chunk-CHRUNVRL.js";
 import {
   NetworkRecordsComputed
-} from "./chunk-JDNHHZFJ.js";
+} from "./chunk-YOYAIZOW.js";
 import {
   url_utils_default
-} from "./chunk-YNYBF6HU.js";
-import "./chunk-2BIJ7VKV.js";
-import "./chunk-MLADMIB3.js";
+} from "./chunk-OZ2G5ZKT.js";
+import "./chunk-EBBYNBKM.js";
+import "./chunk-VW72MYVI.js";
 import {
   UIStrings,
   createIcuMessageFn
-} from "./chunk-T3HXWQEB.js";
-import "./chunk-B4FIMLMR.js";
-import "./chunk-NDN2O67Z.js";
-import "./chunk-V6LRM2MD.js";
+} from "./chunk-O3YNDXOX.js";
+import "./chunk-FOYXSDFQ.js";
+import "./chunk-DQQIQ7YS.js";
+import "./chunk-C5HPB2FB.js";
 import {
   Audit
-} from "./chunk-55A4MDN3.js";
-import "./chunk-23MNVS5G.js";
+} from "./chunk-ZGW6XDCS.js";
+import {
+  __name
+} from "./chunk-XE6XARIN.js";
 
 // node_modules/lighthouse/core/audits/image-size-responsive.js
 var UIStrings2 = {
@@ -44,9 +46,11 @@ var SMALL_IMAGE_THRESHOLD = 64;
 function isVisible(imageRect, viewportDimensions) {
   return (imageRect.bottom - imageRect.top) * (imageRect.right - imageRect.left) > 0 && imageRect.top <= viewportDimensions.innerHeight && imageRect.bottom >= 0 && imageRect.left <= viewportDimensions.innerWidth && imageRect.right >= 0;
 }
+__name(isVisible, "isVisible");
 function isSmallerThanViewport(imageRect, viewportDimensions) {
   return imageRect.bottom - imageRect.top <= viewportDimensions.innerHeight && imageRect.right - imageRect.left <= viewportDimensions.innerWidth;
 }
+__name(isSmallerThanViewport, "isSmallerThanViewport");
 function isCandidate(image, imageRecord) {
   const artisticImageRenderingValues = ["pixelated", "crisp-edges"];
   const densityDescriptorRegex = / \d+(\.\d+)?x/;
@@ -76,13 +80,16 @@ function isCandidate(image, imageRecord) {
   }
   return true;
 }
+__name(isCandidate, "isCandidate");
 function imageHasNaturalDimensions(image) {
   return !!image.naturalDimensions;
 }
+__name(imageHasNaturalDimensions, "imageHasNaturalDimensions");
 function imageHasRightSize(image, DPR) {
   const [expectedWidth, expectedHeight] = allowedImageSize(image.displayedWidth, image.displayedHeight, DPR);
   return image.naturalDimensions.width >= expectedWidth && image.naturalDimensions.height >= expectedHeight;
 }
+__name(imageHasRightSize, "imageHasRightSize");
 function getResult(image, DPR) {
   const [expectedWidth, expectedHeight] = expectedImageSize(image.displayedWidth, image.displayedHeight, DPR);
   return {
@@ -95,6 +102,7 @@ function getResult(image, DPR) {
     expectedPixels: expectedWidth * expectedHeight
   };
 }
+__name(getResult, "getResult");
 function allowedImageSize(displayedWidth, displayedHeight, DPR) {
   let factor = SMALL_IMAGE_FACTOR;
   if (displayedWidth > SMALL_IMAGE_THRESHOLD || displayedHeight > SMALL_IMAGE_THRESHOLD) {
@@ -105,11 +113,13 @@ function allowedImageSize(displayedWidth, displayedHeight, DPR) {
   const height = Math.ceil(factor * requiredDpr * displayedHeight);
   return [width, height];
 }
+__name(allowedImageSize, "allowedImageSize");
 function expectedImageSize(displayedWidth, displayedHeight, DPR) {
   const width = Math.ceil(quantizeDpr(DPR) * displayedWidth);
   const height = Math.ceil(quantizeDpr(DPR) * displayedHeight);
   return [width, height];
 }
+__name(expectedImageSize, "expectedImageSize");
 function deduplicateResultsByUrl(results) {
   results.sort((a, b) => a.url === b.url ? 0 : a.url < b.url ? -1 : 1);
   const deduplicated = [];
@@ -125,12 +135,17 @@ function deduplicateResultsByUrl(results) {
   }
   return deduplicated;
 }
+__name(deduplicateResultsByUrl, "deduplicateResultsByUrl");
 function sortResultsBySizeDelta(results) {
   return results.sort(
     (a, b) => b.expectedPixels - b.actualPixels - (a.expectedPixels - a.actualPixels)
   );
 }
+__name(sortResultsBySizeDelta, "sortResultsBySizeDelta");
 var ImageSizeResponsive = class extends Audit {
+  static {
+    __name(this, "ImageSizeResponsive");
+  }
   /**
    * @return {LH.Audit.Meta}
    */
@@ -184,6 +199,7 @@ function quantizeDpr(dpr) {
   }
   return 1;
 }
+__name(quantizeDpr, "quantizeDpr");
 var image_size_responsive_default = ImageSizeResponsive;
 export {
   UIStrings2 as UIStrings,

@@ -1,45 +1,47 @@
 import{createRequire as __cjsReq}from'module';const require=__cjsReq(import.meta.url);
 import {
   JSBundlesComputed
-} from "../chunk-QQ76V5R3.js";
+} from "../chunk-QMRXOAX7.js";
 import {
   estimateCompressionRatioForContent
-} from "../chunk-S2GJPGDO.js";
+} from "../chunk-KD3VE2GF.js";
 import {
   ByteEfficiencyAudit
-} from "../chunk-DGNLV5FC.js";
-import "../chunk-TMQPGYS4.js";
-import "../chunk-4PONSSZA.js";
-import "../chunk-YN3ARENP.js";
-import "../chunk-IOK3BAH7.js";
-import "../chunk-ZIUDIWBD.js";
-import "../chunk-Z7S4UQSE.js";
-import "../chunk-22N3WN7S.js";
-import "../chunk-GRLAFLTF.js";
+} from "../chunk-5PQDCZ5I.js";
+import "../chunk-4MRT5KFH.js";
+import "../chunk-KWLN6AZG.js";
+import "../chunk-GPJRF3VM.js";
+import "../chunk-GOQIOX72.js";
+import "../chunk-GPGXHKXU.js";
+import "../chunk-TYEYL6JI.js";
+import "../chunk-CVEB2JTF.js";
+import "../chunk-E5UDU7XN.js";
 import {
   EntityClassificationComputed
-} from "../chunk-2FKQ374S.js";
-import "../chunk-ZATS4KUU.js";
-import "../chunk-FTKGXG7F.js";
-import "../chunk-3WVTZQMF.js";
-import "../chunk-3KEMYTTF.js";
-import "../chunk-JDNHHZFJ.js";
-import "../chunk-YNYBF6HU.js";
-import "../chunk-2BIJ7VKV.js";
-import "../chunk-MLADMIB3.js";
+} from "../chunk-2RUE6MFF.js";
+import "../chunk-4WOLRYCI.js";
+import "../chunk-XFJEV2GR.js";
+import "../chunk-NUK2ASLP.js";
+import "../chunk-I4AAD5AR.js";
+import "../chunk-YOYAIZOW.js";
+import "../chunk-OZ2G5ZKT.js";
+import "../chunk-EBBYNBKM.js";
+import "../chunk-VW72MYVI.js";
 import {
   LH_ROOT,
   UIStrings,
   createIcuMessageFn
-} from "../chunk-T3HXWQEB.js";
-import "../chunk-B4FIMLMR.js";
+} from "../chunk-O3YNDXOX.js";
+import "../chunk-FOYXSDFQ.js";
 import {
   init_shim_fs,
   shim_fs_default
-} from "../chunk-NDN2O67Z.js";
-import "../chunk-V6LRM2MD.js";
-import "../chunk-55A4MDN3.js";
-import "../chunk-23MNVS5G.js";
+} from "../chunk-DQQIQ7YS.js";
+import "../chunk-C5HPB2FB.js";
+import "../chunk-ZGW6XDCS.js";
+import {
+  __name
+} from "../chunk-XE6XARIN.js";
 
 // node_modules/lighthouse/core/lib/legacy-javascript/legacy-javascript.js
 init_shim_fs();
@@ -54,6 +56,9 @@ var graphJson = shim_fs_default.readFileSync(
 );
 var graph = JSON.parse(graphJson);
 var CodePatternMatcher = class {
+  static {
+    __name(this, "CodePatternMatcher");
+  }
   /**
    * @param {Pattern[]} patterns
    */
@@ -100,7 +105,7 @@ var CodePatternMatcher = class {
   }
 };
 function buildPolyfillExpression(object, property, coreJs3Module) {
-  const qt = (token) => `['"]${token}['"]`;
+  const qt = /* @__PURE__ */ __name((token) => `['"]${token}['"]`, "qt");
   let expression = "";
   if (object) {
     expression += `${object}\\.${property}\\s?=[^=]`;
@@ -122,6 +127,7 @@ function buildPolyfillExpression(object, property, coreJs3Module) {
   expression += `|${coreJs3Module.replaceAll(".", "\\.")}(?:\\.js)?"`;
   return expression;
 }
+__name(buildPolyfillExpression, "buildPolyfillExpression");
 function getCoreJsPolyfillData() {
   return polyfillModuleData.filter((d) => d.corejs).map((d) => {
     return {
@@ -130,6 +136,7 @@ function getCoreJsPolyfillData() {
     };
   });
 }
+__name(getCoreJsPolyfillData, "getCoreJsPolyfillData");
 function getPolyfillPatterns() {
   const patterns = [];
   for (const { name, coreJs3Module } of getCoreJsPolyfillData()) {
@@ -143,13 +150,14 @@ function getPolyfillPatterns() {
   }
   return patterns;
 }
+__name(getPolyfillPatterns, "getPolyfillPatterns");
 function getTransformPatterns() {
-  const count = (content, pattern) => {
+  const count = /* @__PURE__ */ __name((content, pattern) => {
     if (typeof pattern === "string") {
       return content.split(pattern).length - 1;
     }
     return (content.match(pattern) ?? []).length;
-  };
+  }, "count");
   return [
     // @babel/plugin-transform-classes
     //
@@ -182,29 +190,30 @@ function getTransformPatterns() {
     {
       name: "@babel/plugin-transform-classes",
       expression: "Cannot call a class as a function",
-      estimateBytes: (content) => {
+      estimateBytes: /* @__PURE__ */ __name((content) => {
         return 1e3 + (count(content, "_classCallCheck") - 1) * "_classCallCheck()".length;
-      }
+      }, "estimateBytes")
     },
     {
       name: "@babel/plugin-transform-regenerator",
       expression: "Generator is already running|regeneratorRuntime",
       // Example of this transform: https://gist.github.com/connorjclark/af8bccfff377ac44efc104a79bc75da2
       // `regeneratorRuntime.awrap` is generated for every usage of `await`, and adds ~80 bytes each.
-      estimateBytes: (content) => {
+      estimateBytes: /* @__PURE__ */ __name((content) => {
         return count(content, /regeneratorRuntime\(?\)?\.a?wrap/g) * 80;
-      }
+      }, "estimateBytes")
     },
     {
       name: "@babel/plugin-transform-spread",
       expression: "Invalid attempt to spread non-iterable instance",
-      estimateBytes: (content) => {
+      estimateBytes: /* @__PURE__ */ __name((content) => {
         const per = "_toConsumableArray()".length;
         return 1169 + count(content, /\.apply\(void 0,\s?_toConsumableArray/g) * per;
-      }
+      }, "estimateBytes")
     }
   ];
 }
+__name(getTransformPatterns, "getTransformPatterns");
 function estimateWastedBytes(content, matches) {
   const polyfillResults = matches.filter((m) => !m.name.startsWith("@"));
   const transformResults = matches.filter((m) => m.name.startsWith("@"));
@@ -230,6 +239,7 @@ function estimateWastedBytes(content, matches) {
   const estimatedWastedBytes = estimatedWastedBytesFromPolyfills + estimatedWastedBytesFromTransforms;
   return estimatedWastedBytes;
 }
+__name(estimateWastedBytes, "estimateWastedBytes");
 var matcher = new CodePatternMatcher([
   ...getPolyfillPatterns(),
   ...getTransformPatterns()
@@ -258,6 +268,7 @@ function detectLegacyJavaScript(content, map) {
     estimatedByteSavings: estimateWastedBytes(content, matches)
   };
 }
+__name(detectLegacyJavaScript, "detectLegacyJavaScript");
 
 // node_modules/lighthouse/core/audits/byte-efficiency/legacy-javascript.js
 var UIStrings2 = {
@@ -272,6 +283,9 @@ var UIStrings2 = {
 };
 var str_ = createIcuMessageFn(import.meta.url, UIStrings2);
 var LegacyJavascript = class extends ByteEfficiencyAudit {
+  static {
+    __name(this, "LegacyJavascript");
+  }
   /**
    * @return {LH.Audit.Meta}
    */

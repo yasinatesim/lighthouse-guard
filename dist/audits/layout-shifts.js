@@ -1,39 +1,41 @@
 import{createRequire as __cjsReq}from'module';const require=__cjsReq(import.meta.url);
 import {
   cumulative_layout_shift_default
-} from "./chunk-UKC7TVBE.js";
+} from "./chunk-P323MD2Y.js";
 import {
   trace_elements_default
-} from "./chunk-DNYRYK5L.js";
-import "./chunk-36H7DF6Q.js";
-import "./chunk-IOK3BAH7.js";
+} from "./chunk-YEK4GLJS.js";
+import "./chunk-4IPLRRAD.js";
+import "./chunk-GOQIOX72.js";
 import {
   TraceEngineResultComputed
-} from "./chunk-Z7S4UQSE.js";
+} from "./chunk-TYEYL6JI.js";
 import {
   CumulativeLayoutShiftComputed
-} from "./chunk-22N3WN7S.js";
-import "./chunk-GRLAFLTF.js";
-import "./chunk-2FKQ374S.js";
-import "./chunk-ZATS4KUU.js";
-import "./chunk-FTKGXG7F.js";
-import "./chunk-3WVTZQMF.js";
-import "./chunk-3KEMYTTF.js";
-import "./chunk-JDNHHZFJ.js";
-import "./chunk-YNYBF6HU.js";
-import "./chunk-2BIJ7VKV.js";
-import "./chunk-MLADMIB3.js";
+} from "./chunk-CVEB2JTF.js";
+import "./chunk-E5UDU7XN.js";
+import "./chunk-2RUE6MFF.js";
+import "./chunk-4WOLRYCI.js";
+import "./chunk-XFJEV2GR.js";
+import "./chunk-NUK2ASLP.js";
+import "./chunk-I4AAD5AR.js";
+import "./chunk-YOYAIZOW.js";
+import "./chunk-OZ2G5ZKT.js";
+import "./chunk-EBBYNBKM.js";
+import "./chunk-VW72MYVI.js";
 import {
   UIStrings,
   createIcuMessageFn
-} from "./chunk-T3HXWQEB.js";
-import "./chunk-B4FIMLMR.js";
-import "./chunk-NDN2O67Z.js";
-import "./chunk-V6LRM2MD.js";
+} from "./chunk-O3YNDXOX.js";
+import "./chunk-FOYXSDFQ.js";
+import "./chunk-DQQIQ7YS.js";
+import "./chunk-C5HPB2FB.js";
 import {
   Audit
-} from "./chunk-55A4MDN3.js";
-import "./chunk-23MNVS5G.js";
+} from "./chunk-ZGW6XDCS.js";
+import {
+  __name
+} from "./chunk-XE6XARIN.js";
 
 // node_modules/lighthouse/core/audits/layout-shifts.js
 var MAX_LAYOUT_SHIFTS = 15;
@@ -55,6 +57,9 @@ var UIStrings2 = {
 };
 var str_ = createIcuMessageFn(import.meta.url, UIStrings2);
 var LayoutShifts = class extends Audit {
+  static {
+    __name(this, "LayoutShifts");
+  }
   /**
    * @return {LH.Audit.Meta}
    */

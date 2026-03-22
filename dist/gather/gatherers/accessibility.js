@@ -2,15 +2,17 @@ import{createRequire as __cjsReq}from'module';const require=__cjsReq(import.meta
 import {
   init_shim_fs,
   shim_fs_default
-} from "./chunk-NDN2O67Z.js";
+} from "./chunk-DQQIQ7YS.js";
 import {
   pageFunctions
-} from "./chunk-72S37XJF.js";
-import "./chunk-XKFKI4NM.js";
+} from "./chunk-RDNFCTTE.js";
+import "./chunk-SLD7CHCU.js";
 import {
   base_gatherer_default
-} from "./chunk-CWN23GK2.js";
-import "./chunk-23MNVS5G.js";
+} from "./chunk-3PE3GB6I.js";
+import {
+  __name
+} from "./chunk-XE6XARIN.js";
 
 // node_modules/lighthouse/core/lib/axe.js
 init_shim_fs();
@@ -97,6 +99,7 @@ async function runA11yChecks() {
     version: axeResults.testEngine.version
   };
 }
+__name(runA11yChecks, "runA11yChecks");
 async function runA11yChecksAndResetScroll() {
   const originalScrollPosition = {
     x: window.scrollX,
@@ -108,6 +111,7 @@ async function runA11yChecksAndResetScroll() {
     window.scrollTo(originalScrollPosition.x, originalScrollPosition.y);
   }
 }
+__name(runA11yChecksAndResetScroll, "runA11yChecksAndResetScroll");
 function createAxeRuleResultArtifact(result) {
   const nodes = result.nodes.map((node) => {
     const { target, failureSummary, element } = node;
@@ -116,7 +120,7 @@ function createAxeRuleResultArtifact(result) {
       element
     );
     const relatedNodeElements = /* @__PURE__ */ new Set();
-    const impactToNumber = (impact) => [null, "minor", "moderate", "serious", "critical"].indexOf(impact);
+    const impactToNumber = /* @__PURE__ */ __name((impact) => [null, "minor", "moderate", "serious", "critical"].indexOf(impact), "impactToNumber");
     const checkResults = [...node.any, ...node.all, ...node.none].sort((a, b) => impactToNumber(b.impact) - impactToNumber(a.impact));
     for (const checkResult of checkResults) {
       for (const relatedNode of checkResult.relatedNodes || []) {
@@ -151,7 +155,11 @@ function createAxeRuleResultArtifact(result) {
     error
   };
 }
+__name(createAxeRuleResultArtifact, "createAxeRuleResultArtifact");
 var Accessibility = class extends base_gatherer_default {
+  static {
+    __name(this, "Accessibility");
+  }
   /** @type {LH.Gatherer.GathererMeta} */
   meta = {
     supportedModes: ["snapshot", "navigation"]

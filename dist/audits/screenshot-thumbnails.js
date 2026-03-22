@@ -2,28 +2,32 @@ import{createRequire as __cjsReq}from'module';const require=__cjsReq(import.meta
 import {
   SpeedlineComputed,
   require_jpeg_js
-} from "./chunk-TXZEEGMI.js";
-import "./chunk-FTKGXG7F.js";
-import "./chunk-3WVTZQMF.js";
+} from "./chunk-327KT7TQ.js";
+import "./chunk-XFJEV2GR.js";
+import "./chunk-NUK2ASLP.js";
 import {
   LighthouseError
-} from "./chunk-2BIJ7VKV.js";
-import "./chunk-MLADMIB3.js";
-import "./chunk-T3HXWQEB.js";
-import "./chunk-B4FIMLMR.js";
-import "./chunk-NDN2O67Z.js";
-import "./chunk-V6LRM2MD.js";
+} from "./chunk-EBBYNBKM.js";
+import "./chunk-VW72MYVI.js";
+import "./chunk-O3YNDXOX.js";
+import "./chunk-FOYXSDFQ.js";
+import "./chunk-DQQIQ7YS.js";
+import "./chunk-C5HPB2FB.js";
 import {
   Audit
-} from "./chunk-55A4MDN3.js";
+} from "./chunk-ZGW6XDCS.js";
 import {
+  __name,
   __toESM
-} from "./chunk-23MNVS5G.js";
+} from "./chunk-XE6XARIN.js";
 
 // node_modules/lighthouse/core/audits/screenshot-thumbnails.js
 var import_jpeg_js = __toESM(require_jpeg_js(), 1);
 var NUMBER_OF_THUMBNAILS = 8;
 var ScreenshotThumbnails = class _ScreenshotThumbnails extends Audit {
+  static {
+    __name(this, "ScreenshotThumbnails");
+  }
   /**
    * @return {LH.Audit.Meta}
    */

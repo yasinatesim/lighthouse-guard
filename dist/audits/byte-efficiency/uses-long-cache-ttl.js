@@ -2,32 +2,33 @@ import{createRequire as __cjsReq}from'module';const require=__cjsReq(import.meta
 import {
   NetworkRecordsComputed,
   NetworkRequest
-} from "../chunk-JDNHHZFJ.js";
+} from "../chunk-YOYAIZOW.js";
 import {
   url_utils_default
-} from "../chunk-YNYBF6HU.js";
-import "../chunk-2BIJ7VKV.js";
-import "../chunk-MLADMIB3.js";
+} from "../chunk-OZ2G5ZKT.js";
+import "../chunk-EBBYNBKM.js";
+import "../chunk-VW72MYVI.js";
 import {
   UIStrings,
   createIcuMessageFn
-} from "../chunk-T3HXWQEB.js";
-import "../chunk-B4FIMLMR.js";
-import "../chunk-NDN2O67Z.js";
-import "../chunk-V6LRM2MD.js";
+} from "../chunk-O3YNDXOX.js";
+import "../chunk-FOYXSDFQ.js";
+import "../chunk-DQQIQ7YS.js";
+import "../chunk-C5HPB2FB.js";
 import {
   Audit,
   linearInterpolation
-} from "../chunk-55A4MDN3.js";
+} from "../chunk-ZGW6XDCS.js";
 import {
   __commonJS,
+  __name,
   __toESM
-} from "../chunk-23MNVS5G.js";
+} from "../chunk-XE6XARIN.js";
 
 // node_modules/parse-cache-control/index.js
 var require_parse_cache_control = __commonJS({
   "node_modules/parse-cache-control/index.js"(exports, module) {
-    module.exports = function parseCacheControl2(field) {
+    module.exports = /* @__PURE__ */ __name(function parseCacheControl2(field) {
       if (typeof field !== "string") {
         return null;
       }
@@ -49,7 +50,7 @@ var require_parse_cache_control = __commonJS({
         }
       }
       return err ? null : header;
-    };
+    }, "parseCacheControl");
   }
 });
 
@@ -71,6 +72,9 @@ var UIStrings2 = {
 var str_ = createIcuMessageFn(import.meta.url, UIStrings2);
 var IGNORE_THRESHOLD_IN_PERCENT = 0.925;
 var CacheHeaders = class _CacheHeaders extends Audit {
+  static {
+    __name(this, "CacheHeaders");
+  }
   /**
    * @return {LH.Audit.Meta}
    */

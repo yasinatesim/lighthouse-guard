@@ -1,14 +1,19 @@
 import{createRequire as __cjsReq}from'module';const require=__cjsReq(import.meta.url);
 import {
   devtools_log_default
-} from "./chunk-BINTPAJN.js";
+} from "./chunk-NSCX6JDY.js";
 import {
   base_gatherer_default
-} from "./chunk-CWN23GK2.js";
-import "./chunk-23MNVS5G.js";
+} from "./chunk-3PE3GB6I.js";
+import {
+  __name
+} from "./chunk-XE6XARIN.js";
 
 // node_modules/lighthouse/core/gather/gatherers/devtools-log-compat.js
 var DevtoolsLogCompat = class extends base_gatherer_default {
+  static {
+    __name(this, "DevtoolsLogCompat");
+  }
   /** @type {LH.Gatherer.GathererMeta<'DevtoolsLog'>} */
   meta = {
     supportedModes: ["timespan", "navigation"],

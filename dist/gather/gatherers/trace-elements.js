@@ -2,52 +2,56 @@ import{createRequire as __cjsReq}from'module';const require=__cjsReq(import.meta
 import {
   require_SDK,
   source_maps_default
-} from "./chunk-XJLDUXQA.js";
+} from "./chunk-J6ARWDJP.js";
 import {
   trace_default
-} from "./chunk-V3CGP63T.js";
-import "./chunk-HLDSXEFM.js";
+} from "./chunk-NE4YDJKR.js";
+import "./chunk-NESHVRVI.js";
 import {
   Sentry
-} from "./chunk-ACZALYVN.js";
+} from "./chunk-4LDDF7I7.js";
 import {
   TraceProcessor
-} from "./chunk-3WVTZQMF.js";
+} from "./chunk-NUK2ASLP.js";
 import {
   Processor_exports,
   handlers_exports,
   helpers_exports,
   insights_exports,
   makeComputedArtifact
-} from "./chunk-ELEI4PD3.js";
+} from "./chunk-QE4YYANC.js";
 import {
   resolveNodeIdToObjectId
-} from "./chunk-NG67H7T4.js";
+} from "./chunk-2VOQBKE3.js";
 import {
   ExecutionContext
-} from "./chunk-S3D7FHRV.js";
+} from "./chunk-FP565QWJ.js";
 import {
   LighthouseError,
   createIcuMessageFn
-} from "./chunk-BSOGFMIV.js";
+} from "./chunk-HXOADL7R.js";
 import {
   lighthouse_logger_default
-} from "./chunk-B4FIMLMR.js";
-import "./chunk-V6LRM2MD.js";
-import "./chunk-NDN2O67Z.js";
+} from "./chunk-FOYXSDFQ.js";
+import "./chunk-C5HPB2FB.js";
+import "./chunk-DQQIQ7YS.js";
 import {
   pageFunctions
-} from "./chunk-72S37XJF.js";
-import "./chunk-XKFKI4NM.js";
+} from "./chunk-RDNFCTTE.js";
+import "./chunk-SLD7CHCU.js";
 import {
   base_gatherer_default
-} from "./chunk-CWN23GK2.js";
+} from "./chunk-3PE3GB6I.js";
 import {
+  __name,
   __toESM
-} from "./chunk-23MNVS5G.js";
+} from "./chunk-XE6XARIN.js";
 
 // node_modules/lighthouse/core/lib/lh-trace-processor.js
 var LHTraceProcessor = class extends TraceProcessor {
+  static {
+    __name(this, "LHTraceProcessor");
+  }
   /**
    * @return {Error}
    */
@@ -80,6 +84,9 @@ var lh_trace_processor_default = LHTraceProcessor;
 
 // node_modules/lighthouse/core/computed/processed-trace.js
 var ProcessedTrace = class {
+  static {
+    __name(this, "ProcessedTrace");
+  }
   /**
     * @param {LH.Trace} trace
     * @return {Promise<LH.Artifacts.ProcessedTrace>}
@@ -92,6 +99,9 @@ var ProcessedTraceComputed = makeComputedArtifact(ProcessedTrace, null);
 
 // node_modules/lighthouse/core/computed/processed-navigation.js
 var ProcessedNavigation = class {
+  static {
+    __name(this, "ProcessedNavigation");
+  }
   /**
    * @param {LH.Trace | LH.Artifacts.ProcessedTrace} traceOrProcessedTrace
    * @return {traceOrProcessedTrace is LH.Artifacts.ProcessedTrace}
@@ -129,6 +139,9 @@ var interactionTypeToType = {
   drag: CLICK_TAP_DRAG_EVENTS
 };
 var Responsiveness = class _Responsiveness {
+  static {
+    __name(this, "Responsiveness");
+  }
   /**
    * @param {LH.Artifacts.ProcessedTrace} processedTrace
    * @return {ResponsivenessEvent|null}
@@ -229,6 +242,7 @@ function addRectTopAndBottom({ x, y, width, height }) {
     height
   };
 }
+__name(addRectTopAndBottom, "addRectTopAndBottom");
 function getRectOverlapArea(rect1, rect2) {
   const rectYOverlap = Math.min(rect1.bottom, rect2.bottom) - Math.max(rect1.top, rect2.top);
   if (rectYOverlap <= 0) return 0;
@@ -236,9 +250,11 @@ function getRectOverlapArea(rect1, rect2) {
   if (rectXOverlap <= 0) return 0;
   return rectXOverlap * rectYOverlap;
 }
+__name(getRectOverlapArea, "getRectOverlapArea");
 function getRectArea(rect) {
   return rect.width * rect.height;
 }
+__name(getRectArea, "getRectArea");
 function traceRectToLHRect(rect) {
   const rectArgs = {
     x: rect[0],
@@ -248,6 +264,7 @@ function traceRectToLHRect(rect) {
   };
   return addRectTopAndBottom(rectArgs);
 }
+__name(traceRectToLHRect, "traceRectToLHRect");
 
 // node_modules/lighthouse/core/lib/polyfill-dom-rect.js
 function polyfillDOMRect() {
@@ -255,9 +272,11 @@ function polyfillDOMRect() {
     function number(v) {
       return v === void 0 ? 0 : Number(v);
     }
+    __name(number, "number");
     function different(u, v) {
       return u !== v && !(isNaN(u) && isNaN(v));
     }
+    __name(different, "different");
     function DOMRect(xArg, yArg, wArg, hArg) {
       let x, y, width, height, left, right, top, bottom;
       x = number(xArg);
@@ -266,94 +285,96 @@ function polyfillDOMRect() {
       height = number(hArg);
       Object.defineProperties(this, {
         x: {
-          get: function() {
+          get: /* @__PURE__ */ __name(function() {
             return x;
-          },
-          set: function(newX) {
+          }, "get"),
+          set: /* @__PURE__ */ __name(function(newX) {
             if (different(x, newX)) {
               x = newX;
               left = right = void 0;
             }
-          },
+          }, "set"),
           enumerable: true
         },
         y: {
-          get: function() {
+          get: /* @__PURE__ */ __name(function() {
             return y;
-          },
-          set: function(newY) {
+          }, "get"),
+          set: /* @__PURE__ */ __name(function(newY) {
             if (different(y, newY)) {
               y = newY;
               top = bottom = void 0;
             }
-          },
+          }, "set"),
           enumerable: true
         },
         width: {
-          get: function() {
+          get: /* @__PURE__ */ __name(function() {
             return width;
-          },
-          set: function(newWidth) {
+          }, "get"),
+          set: /* @__PURE__ */ __name(function(newWidth) {
             if (different(width, newWidth)) {
               width = newWidth;
               left = right = void 0;
             }
-          },
+          }, "set"),
           enumerable: true
         },
         height: {
-          get: function() {
+          get: /* @__PURE__ */ __name(function() {
             return height;
-          },
-          set: function(newHeight) {
+          }, "get"),
+          set: /* @__PURE__ */ __name(function(newHeight) {
             if (different(height, newHeight)) {
               height = newHeight;
               top = bottom = void 0;
             }
-          },
+          }, "set"),
           enumerable: true
         },
         left: {
-          get: function() {
+          get: /* @__PURE__ */ __name(function() {
             if (left === void 0) {
               left = x + Math.min(0, width);
             }
             return left;
-          },
+          }, "get"),
           enumerable: true
         },
         right: {
-          get: function() {
+          get: /* @__PURE__ */ __name(function() {
             if (right === void 0) {
               right = x + Math.max(0, width);
             }
             return right;
-          },
+          }, "get"),
           enumerable: true
         },
         top: {
-          get: function() {
+          get: /* @__PURE__ */ __name(function() {
             if (top === void 0) {
               top = y + Math.min(0, height);
             }
             return top;
-          },
+          }, "get"),
           enumerable: true
         },
         bottom: {
-          get: function() {
+          get: /* @__PURE__ */ __name(function() {
             if (bottom === void 0) {
               bottom = y + Math.max(0, height);
             }
             return bottom;
-          },
+          }, "get"),
           enumerable: true
         }
       });
     }
+    __name(DOMRect, "DOMRect");
     globalThis.DOMRect = DOMRect;
   })(globalThis);
 }
+__name(polyfillDOMRect, "polyfillDOMRect");
 
 // node_modules/lighthouse/core/lib/trace-engine.js
 polyfillDOMRect();
@@ -365,6 +386,9 @@ var Helpers = helpers_exports;
 // node_modules/lighthouse/core/computed/metrics/cumulative-layout-shift.js
 var RECENT_INPUT_WINDOW = 500;
 var CumulativeLayoutShift = class _CumulativeLayoutShift {
+  static {
+    __name(this, "CumulativeLayoutShift");
+  }
   /**
    * Returns all LayoutShift events that had no recent input.
    * Only a `weightedScore` per event is returned. For non-main-frame events, this is
@@ -466,7 +490,7 @@ var CumulativeLayoutShift = class _CumulativeLayoutShift {
    * @param {LayoutShiftEvent[]} mainFrameShiftEvents
    */
   static async computeWithSharedTraceEngine(allFrameShiftEvents, mainFrameShiftEvents) {
-    const run = async (events) => {
+    const run = /* @__PURE__ */ __name(async (events) => {
       const processor = new TraceProcessor2({
         LayoutShifts: TraceHandlers.LayoutShifts,
         Screenshots: TraceHandlers.Screenshots
@@ -480,7 +504,7 @@ var CumulativeLayoutShift = class _CumulativeLayoutShift {
         throw new Error("null trace engine result");
       }
       return processor.parsedTrace.LayoutShifts.sessionMaxScore;
-    };
+    }, "run");
     const cumulativeLayoutShift = await run(allFrameShiftEvents.map((e) => e.event));
     const cumulativeLayoutShiftMainFrame = await run(mainFrameShiftEvents.map((e) => e.event));
     return { cumulativeLayoutShift, cumulativeLayoutShiftMainFrame };
@@ -545,6 +569,9 @@ var CumulativeLayoutShiftComputed = makeComputedArtifact(CumulativeLayoutShift, 
 // node_modules/lighthouse/core/computed/trace-engine-result.js
 var import_SDK = __toESM(require_SDK(), 1);
 var TraceEngineResult = class _TraceEngineResult {
+  static {
+    __name(this, "TraceEngineResult");
+  }
   /**
    * @param {LH.TraceEvent[]} _traceEvents
    * @param {LH.Audit.Context['settings']} settings
@@ -670,6 +697,7 @@ var TraceEngineResult = class _TraceEngineResult {
         }
       }
     }
+    __name(recursiveReplaceLocalizableStrings, "recursiveReplaceLocalizableStrings");
     recursiveReplaceLocalizableStrings(object, (traceEngineI18nObject) => {
       let values = traceEngineI18nObject.values;
       if (values) {
@@ -750,7 +778,11 @@ function getNodeDetailsData() {
   }
   return traceElement;
 }
+__name(getNodeDetailsData, "getNodeDetailsData");
 var TraceElements = class _TraceElements extends base_gatherer_default {
+  static {
+    __name(this, "TraceElements");
+  }
   /** @type {LH.Gatherer.GathererMeta<'Trace'|'SourceMaps'>} */
   meta = {
     supportedModes: ["timespan", "navigation"],
@@ -816,6 +848,7 @@ var TraceElements = class _TraceElements extends base_gatherer_default {
         });
       }
     }
+    __name(recursiveObjectEnumerate, "recursiveObjectEnumerate");
     const nodeIds = [];
     recursiveObjectEnumerate(insightSet.model, (val, key) => {
       const keys = ["nodeId", "node_id", "backendNodeId"];

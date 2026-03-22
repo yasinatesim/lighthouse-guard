@@ -1,31 +1,33 @@
 import{createRequire as __cjsReq}from'module';const require=__cjsReq(import.meta.url);
 import {
   CriticalRequestChainsComputed
-} from "./chunk-53MRSW35.js";
-import "./chunk-7IFF6OOL.js";
-import "./chunk-ZIUDIWBD.js";
-import "./chunk-Z7S4UQSE.js";
-import "./chunk-22N3WN7S.js";
-import "./chunk-GRLAFLTF.js";
-import "./chunk-2FKQ374S.js";
-import "./chunk-ZATS4KUU.js";
-import "./chunk-FTKGXG7F.js";
-import "./chunk-3WVTZQMF.js";
-import "./chunk-3KEMYTTF.js";
-import "./chunk-JDNHHZFJ.js";
-import "./chunk-YNYBF6HU.js";
-import "./chunk-2BIJ7VKV.js";
-import "./chunk-MLADMIB3.js";
+} from "./chunk-JCZ6QFPA.js";
+import "./chunk-HZ5CS3EU.js";
+import "./chunk-GPGXHKXU.js";
+import "./chunk-TYEYL6JI.js";
+import "./chunk-CVEB2JTF.js";
+import "./chunk-E5UDU7XN.js";
+import "./chunk-2RUE6MFF.js";
+import "./chunk-4WOLRYCI.js";
+import "./chunk-XFJEV2GR.js";
+import "./chunk-NUK2ASLP.js";
+import "./chunk-I4AAD5AR.js";
+import "./chunk-YOYAIZOW.js";
+import "./chunk-OZ2G5ZKT.js";
+import "./chunk-EBBYNBKM.js";
+import "./chunk-VW72MYVI.js";
 import {
   createIcuMessageFn
-} from "./chunk-T3HXWQEB.js";
-import "./chunk-B4FIMLMR.js";
-import "./chunk-NDN2O67Z.js";
-import "./chunk-V6LRM2MD.js";
+} from "./chunk-O3YNDXOX.js";
+import "./chunk-FOYXSDFQ.js";
+import "./chunk-DQQIQ7YS.js";
+import "./chunk-C5HPB2FB.js";
 import {
   Audit
-} from "./chunk-55A4MDN3.js";
-import "./chunk-23MNVS5G.js";
+} from "./chunk-ZGW6XDCS.js";
+import {
+  __name
+} from "./chunk-XE6XARIN.js";
 
 // node_modules/lighthouse/core/audits/critical-request-chains.js
 var UIStrings = {
@@ -41,6 +43,9 @@ var UIStrings = {
 };
 var str_ = createIcuMessageFn(import.meta.url, UIStrings);
 var CriticalRequestChains = class _CriticalRequestChains extends Audit {
+  static {
+    __name(this, "CriticalRequestChains");
+  }
   /**
    * @return {LH.Audit.Meta}
    */
@@ -83,6 +88,7 @@ var CriticalRequestChains = class _CriticalRequestChains extends Audit {
         }
       }, "");
     }
+    __name(walk, "walk");
     walk(tree, 0);
   }
   /**
@@ -149,6 +155,7 @@ var CriticalRequestChains = class _CriticalRequestChains extends Audit {
       }
       chainMap.set(opts.id, chain);
     }
+    __name(flatten, "flatten");
     _CriticalRequestChains._traverse(tree, flatten);
     return flattendChains;
   }
@@ -176,6 +183,7 @@ var CriticalRequestChains = class _CriticalRequestChains extends Audit {
         }
       }, "");
     }
+    __name(walk, "walk");
     const flattenedChains = _CriticalRequestChains.flattenRequests(chains);
     const initialNavKey = Object.keys(flattenedChains)[0];
     const initialNavChildren = initialNavKey && flattenedChains[initialNavKey].children;

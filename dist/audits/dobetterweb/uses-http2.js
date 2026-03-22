@@ -1,44 +1,46 @@
 import{createRequire as __cjsReq}from'module';const require=__cjsReq(import.meta.url);
 import {
   LanternLargestContentfulPaintComputed
-} from "../chunk-4PONSSZA.js";
+} from "../chunk-KWLN6AZG.js";
 import {
   LanternFirstContentfulPaintComputed
-} from "../chunk-YN3ARENP.js";
-import "../chunk-IOK3BAH7.js";
-import "../chunk-ZIUDIWBD.js";
-import "../chunk-Z7S4UQSE.js";
-import "../chunk-22N3WN7S.js";
+} from "../chunk-GPJRF3VM.js";
+import "../chunk-GOQIOX72.js";
+import "../chunk-GPGXHKXU.js";
+import "../chunk-TYEYL6JI.js";
+import "../chunk-CVEB2JTF.js";
 import {
   LoadSimulatorComputed
-} from "../chunk-GRLAFLTF.js";
+} from "../chunk-E5UDU7XN.js";
 import {
   EntityClassificationComputed
-} from "../chunk-2FKQ374S.js";
-import "../chunk-ZATS4KUU.js";
-import "../chunk-FTKGXG7F.js";
-import "../chunk-3WVTZQMF.js";
-import "../chunk-3KEMYTTF.js";
+} from "../chunk-2RUE6MFF.js";
+import "../chunk-4WOLRYCI.js";
+import "../chunk-XFJEV2GR.js";
+import "../chunk-NUK2ASLP.js";
+import "../chunk-I4AAD5AR.js";
 import {
   NetworkRecordsComputed,
   NetworkRequest
-} from "../chunk-JDNHHZFJ.js";
+} from "../chunk-YOYAIZOW.js";
 import {
   url_utils_default
-} from "../chunk-YNYBF6HU.js";
-import "../chunk-2BIJ7VKV.js";
-import "../chunk-MLADMIB3.js";
+} from "../chunk-OZ2G5ZKT.js";
+import "../chunk-EBBYNBKM.js";
+import "../chunk-VW72MYVI.js";
 import {
   UIStrings,
   createIcuMessageFn
-} from "../chunk-T3HXWQEB.js";
-import "../chunk-B4FIMLMR.js";
-import "../chunk-NDN2O67Z.js";
-import "../chunk-V6LRM2MD.js";
+} from "../chunk-O3YNDXOX.js";
+import "../chunk-FOYXSDFQ.js";
+import "../chunk-DQQIQ7YS.js";
+import "../chunk-C5HPB2FB.js";
 import {
   Audit
-} from "../chunk-55A4MDN3.js";
-import "../chunk-23MNVS5G.js";
+} from "../chunk-ZGW6XDCS.js";
+import {
+  __name
+} from "../chunk-XE6XARIN.js";
 
 // node_modules/lighthouse/core/audits/dobetterweb/uses-http2.js
 var UIStrings2 = {
@@ -64,6 +66,9 @@ var STATIC_RESOURCE_TYPES = /* @__PURE__ */ new Set([
   NetworkRequest.TYPES.Media
 ]);
 var UsesHTTP2Audit = class _UsesHTTP2Audit extends Audit {
+  static {
+    __name(this, "UsesHTTP2Audit");
+  }
   /**
    * @return {LH.Audit.Meta}
    */

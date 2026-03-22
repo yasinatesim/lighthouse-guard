@@ -2,50 +2,52 @@ import{createRequire as __cjsReq}from'module';const require=__cjsReq(import.meta
 import {
   getAttributableURLForTask,
   getJavaScriptURLs
-} from "./chunk-KRP3ZBL5.js";
+} from "./chunk-32EFSKRS.js";
 import {
   TotalBlockingTimeComputed
-} from "./chunk-F3LBQ6H5.js";
+} from "./chunk-PJ4YREQU.js";
 import {
   MainThreadTasksComputed
-} from "./chunk-FXMGSRO7.js";
-import "./chunk-QBXT32HH.js";
-import "./chunk-CRKKLQWT.js";
-import "./chunk-K7WBVFH2.js";
-import "./chunk-DGRQI5GC.js";
-import "./chunk-4PONSSZA.js";
-import "./chunk-YN3ARENP.js";
-import "./chunk-IOK3BAH7.js";
+} from "./chunk-AJV4A5MH.js";
+import "./chunk-UE3SWGEC.js";
+import "./chunk-FAQPRD3P.js";
+import "./chunk-QRPKE3CF.js";
+import "./chunk-OMH7NEK4.js";
+import "./chunk-KWLN6AZG.js";
+import "./chunk-GPJRF3VM.js";
+import "./chunk-GOQIOX72.js";
 import {
   PageDependencyGraphComputed
-} from "./chunk-ZIUDIWBD.js";
-import "./chunk-Z7S4UQSE.js";
-import "./chunk-22N3WN7S.js";
+} from "./chunk-GPGXHKXU.js";
+import "./chunk-TYEYL6JI.js";
+import "./chunk-CVEB2JTF.js";
 import {
   LoadSimulatorComputed
-} from "./chunk-GRLAFLTF.js";
-import "./chunk-2FKQ374S.js";
-import "./chunk-ZATS4KUU.js";
-import "./chunk-FTKGXG7F.js";
-import "./chunk-3WVTZQMF.js";
-import "./chunk-3KEMYTTF.js";
+} from "./chunk-E5UDU7XN.js";
+import "./chunk-2RUE6MFF.js";
+import "./chunk-4WOLRYCI.js";
+import "./chunk-XFJEV2GR.js";
+import "./chunk-NUK2ASLP.js";
+import "./chunk-I4AAD5AR.js";
 import {
   NetworkRecordsComputed
-} from "./chunk-JDNHHZFJ.js";
-import "./chunk-YNYBF6HU.js";
-import "./chunk-2BIJ7VKV.js";
-import "./chunk-MLADMIB3.js";
+} from "./chunk-YOYAIZOW.js";
+import "./chunk-OZ2G5ZKT.js";
+import "./chunk-EBBYNBKM.js";
+import "./chunk-VW72MYVI.js";
 import {
   UIStrings,
   createIcuMessageFn
-} from "./chunk-T3HXWQEB.js";
-import "./chunk-B4FIMLMR.js";
-import "./chunk-NDN2O67Z.js";
-import "./chunk-V6LRM2MD.js";
+} from "./chunk-O3YNDXOX.js";
+import "./chunk-FOYXSDFQ.js";
+import "./chunk-DQQIQ7YS.js";
+import "./chunk-C5HPB2FB.js";
 import {
   Audit
-} from "./chunk-55A4MDN3.js";
-import "./chunk-23MNVS5G.js";
+} from "./chunk-ZGW6XDCS.js";
+import {
+  __name
+} from "./chunk-XE6XARIN.js";
 
 // node_modules/lighthouse/core/audits/long-tasks.js
 var DEFAULT_TIMING = { startTime: 0, endTime: 0, duration: 0 };
@@ -67,10 +69,15 @@ function insertUrl(urls, url) {
   if (index > -1) return index;
   return urls.push(url) - 1;
 }
+__name(insertUrl, "insertUrl");
 function roundTenths(value) {
   return Math.round(value * 10) / 10;
 }
+__name(roundTenths, "roundTenths");
 var LongTasks = class _LongTasks extends Audit {
+  static {
+    __name(this, "LongTasks");
+  }
   /**
    * @return {LH.Audit.Meta}
    */

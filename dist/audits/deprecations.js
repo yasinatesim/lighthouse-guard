@@ -1,20 +1,22 @@
 import{createRequire as __cjsReq}from'module';const require=__cjsReq(import.meta.url);
 import {
   JSBundlesComputed
-} from "./chunk-QQ76V5R3.js";
-import "./chunk-3KEMYTTF.js";
-import "./chunk-MLADMIB3.js";
+} from "./chunk-QMRXOAX7.js";
+import "./chunk-I4AAD5AR.js";
+import "./chunk-VW72MYVI.js";
 import {
   UIStrings,
   createIcuMessageFn
-} from "./chunk-T3HXWQEB.js";
-import "./chunk-B4FIMLMR.js";
-import "./chunk-NDN2O67Z.js";
-import "./chunk-V6LRM2MD.js";
+} from "./chunk-O3YNDXOX.js";
+import "./chunk-FOYXSDFQ.js";
+import "./chunk-DQQIQ7YS.js";
+import "./chunk-C5HPB2FB.js";
 import {
   Audit
-} from "./chunk-55A4MDN3.js";
-import "./chunk-23MNVS5G.js";
+} from "./chunk-ZGW6XDCS.js";
+import {
+  __name
+} from "./chunk-XE6XARIN.js";
 
 // node_modules/lighthouse/core/lib/deprecations-strings.js
 var UIStrings2 = {
@@ -409,6 +411,7 @@ function getIssueDetailDescription(issueDetails) {
     message
   };
 }
+__name(getIssueDetailDescription, "getIssueDetailDescription");
 
 // node_modules/lighthouse/core/audits/deprecations.js
 var UIStrings4 = {
@@ -430,6 +433,9 @@ var UIStrings4 = {
 };
 var str_2 = createIcuMessageFn(import.meta.url, UIStrings4);
 var Deprecations = class extends Audit {
+  static {
+    __name(this, "Deprecations");
+  }
   /**
    * @return {LH.Audit.Meta}
    */

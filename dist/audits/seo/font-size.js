@@ -1,19 +1,21 @@
 import{createRequire as __cjsReq}from'module';const require=__cjsReq(import.meta.url);
 import {
   ViewportMetaComputed
-} from "../chunk-CYP4ABH3.js";
-import "../chunk-MLADMIB3.js";
+} from "../chunk-25JDUMOU.js";
+import "../chunk-VW72MYVI.js";
 import {
   UIStrings,
   createIcuMessageFn
-} from "../chunk-T3HXWQEB.js";
-import "../chunk-B4FIMLMR.js";
-import "../chunk-NDN2O67Z.js";
-import "../chunk-V6LRM2MD.js";
+} from "../chunk-O3YNDXOX.js";
+import "../chunk-FOYXSDFQ.js";
+import "../chunk-DQQIQ7YS.js";
+import "../chunk-C5HPB2FB.js";
 import {
   Audit
-} from "../chunk-55A4MDN3.js";
-import "../chunk-23MNVS5G.js";
+} from "../chunk-ZGW6XDCS.js";
+import {
+  __name
+} from "../chunk-XE6XARIN.js";
 
 // node_modules/lighthouse/core/audits/seo/font-size.js
 var MINIMAL_PERCENTAGE_OF_LEGIBLE_TEXT = 60;
@@ -60,6 +62,7 @@ function getUniqueFailingRules(fontSizeArtifact) {
   });
   return [...failingRules.values()];
 }
+__name(getUniqueFailingRules, "getUniqueFailingRules");
 function getAttributeMap(attributes = []) {
   const map = /* @__PURE__ */ new Map();
   for (let i = 0; i < attributes.length; i += 2) {
@@ -73,6 +76,7 @@ function getAttributeMap(attributes = []) {
   }
   return map;
 }
+__name(getAttributeMap, "getAttributeMap");
 function getSelector(parentNode) {
   const attributeMap = getAttributeMap(parentNode.attributes);
   if (attributeMap.has("id")) {
@@ -85,6 +89,7 @@ function getSelector(parentNode) {
   }
   return parentNode.nodeName.toLowerCase();
 }
+__name(getSelector, "getSelector");
 function nodeToTableNode(parentNode) {
   const attributes = parentNode.attributes || [];
   const attributesString = attributes.map(
@@ -96,6 +101,7 @@ function nodeToTableNode(parentNode) {
     snippet: `<${parentNode.nodeName.toLowerCase()}${attributesString}>`
   };
 }
+__name(nodeToTableNode, "nodeToTableNode");
 function findStyleRuleSource(baseURL, styleDeclaration, parentNode) {
   if (!styleDeclaration || styleDeclaration.type === "Attributes" || styleDeclaration.type === "Inline") {
     return {
@@ -144,6 +150,7 @@ function findStyleRuleSource(baseURL, styleDeclaration, parentNode) {
     source: { type: "code", value: "Unknown" }
   };
 }
+__name(findStyleRuleSource, "findStyleRuleSource");
 function getFontArtifactId(styleDeclaration, textNodeId) {
   if (styleDeclaration && styleDeclaration.type === "Regular") {
     const startLine = styleDeclaration.range ? styleDeclaration.range.startLine : 0;
@@ -153,7 +160,11 @@ function getFontArtifactId(styleDeclaration, textNodeId) {
     return `node_${textNodeId}`;
   }
 }
+__name(getFontArtifactId, "getFontArtifactId");
 var FontSize = class extends Audit {
+  static {
+    __name(this, "FontSize");
+  }
   /**
    * @return {LH.Audit.Meta}
    */

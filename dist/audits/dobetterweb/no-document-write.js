@@ -1,19 +1,21 @@
 import{createRequire as __cjsReq}from'module';const require=__cjsReq(import.meta.url);
 import {
   violation_audit_default
-} from "../chunk-ZKWZVC2F.js";
-import "../chunk-QQ76V5R3.js";
-import "../chunk-3KEMYTTF.js";
-import "../chunk-MLADMIB3.js";
+} from "../chunk-UWRQ4V42.js";
+import "../chunk-QMRXOAX7.js";
+import "../chunk-I4AAD5AR.js";
+import "../chunk-VW72MYVI.js";
 import {
   UIStrings,
   createIcuMessageFn
-} from "../chunk-T3HXWQEB.js";
-import "../chunk-B4FIMLMR.js";
-import "../chunk-NDN2O67Z.js";
-import "../chunk-V6LRM2MD.js";
-import "../chunk-55A4MDN3.js";
-import "../chunk-23MNVS5G.js";
+} from "../chunk-O3YNDXOX.js";
+import "../chunk-FOYXSDFQ.js";
+import "../chunk-DQQIQ7YS.js";
+import "../chunk-C5HPB2FB.js";
+import "../chunk-ZGW6XDCS.js";
+import {
+  __name
+} from "../chunk-XE6XARIN.js";
 
 // node_modules/lighthouse/core/audits/dobetterweb/no-document-write.js
 var UIStrings2 = {
@@ -26,6 +28,9 @@ var UIStrings2 = {
 };
 var str_ = createIcuMessageFn(import.meta.url, UIStrings2);
 var NoDocWriteAudit = class extends violation_audit_default {
+  static {
+    __name(this, "NoDocWriteAudit");
+  }
   /**
    * @return {LH.Audit.Meta}
    */
