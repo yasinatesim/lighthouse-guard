@@ -10,8 +10,10 @@ export class SafeChrome {
     await this.kill();
 
     try {
+      const chromePath = process.env.CHROME_PATH || process.env.CHROMIUM_PATH || undefined;
+      if (chromePath) console.log(`   🔍 Chrome path: ${chromePath}`);
       this.chrome = await chromeLauncher.launch({
-        chromePath: process.env.CHROME_PATH || process.env.CHROMIUM_PATH || undefined,
+        chromePath,
         chromeFlags: [
           ...this.chromeFlags,
           '--headless=new',
